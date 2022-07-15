@@ -19,8 +19,6 @@ public class Deck : MonoBehaviour
     {
         SetDeck();
         SetDrawPile();
-
-        DrawCards();
     }
 
     // Adding some default cards to the deck
@@ -30,12 +28,14 @@ public class Deck : MonoBehaviour
         {
             cards.Add(new WarriorCard());
             cards.Add(new MageCard());
+            cards.Add(new StrengthCard());
         }
+    }
 
-        for (int i = 0; i < cards.Count; i++)
-        {
-            Debug.Log("Card: " + cards[i]);
-        }
+    public void SetHand()
+    {
+        drawPile = drawPile.OrderBy(a => Random.value).ToList();
+        DrawCards();
     }
 
     void SetDrawPile()
@@ -61,6 +61,8 @@ public class Deck : MonoBehaviour
     {
         if (drawPile.Count == 0)
         {
+            Debug.Log("Shuffling discard pile back into the draw pile.");
+
             // shuffle the discard pile back into the draw pile
             drawPile = discardPile.OrderBy(a => Random.value).ToList();
             discardPile.Clear();
@@ -70,5 +72,10 @@ public class Deck : MonoBehaviour
         Card card = drawPile[0];
         drawPile = drawPile.GetRange(1, drawPile.Count - 1);
         hand.Add (card);
+    }
+
+    public List<Card> GetHand()
+    {
+        return hand;
     }
 }
