@@ -39,7 +39,7 @@ public class GameLoopManager : MonoBehaviour
             {
                 Instantiate(prefab,
                 position,
-                Quaternion.Euler(new Vector3(0, -90, 0)));
+                Quaternion.Euler(new Vector3(0, -270, 0)));
                 position.x += 0.09f;
             }
         }
