@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Card : MonoBehaviour
+public interface Card
 {
     // Start is called before the first frame update
     void Start()
@@ -21,7 +21,7 @@ public class Card : MonoBehaviour
 /**
  * A card that represents a pawn, a spawnable character.
  */
-public class PawnCard: Card {
+public class PawnCard : Card {
     
     public static int COMBAT_TYPE_MELEE = 0;
     public static int COMBAT_TYPE_RANGED = 1;
