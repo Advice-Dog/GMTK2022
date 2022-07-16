@@ -10,6 +10,8 @@ public class GameLoopManager : MonoBehaviour
 
     public GameObject pawnPrefab;
 
+    public GameObject smokePrefab;
+
     private int roomIndex = 0;
 
     private static int MAX_ROOM_COUNT = 5;
@@ -274,6 +276,8 @@ public class GameLoopManager : MonoBehaviour
 
         // todo: should create based on the card
         activePawn = new Pawn();
+
+        SpawnSmokeBomb (position);
     }
 
     void SpawnEnemyPawn(int index)
@@ -292,6 +296,20 @@ public class GameLoopManager : MonoBehaviour
             Quaternion.Euler(new Vector3(0, 0, 0)));
 
         obj.transform.parent = HeroSpawns.transform;
+
+        SpawnSmokeBomb (position);
+    }
+
+    void SpawnSmokeBomb(Vector3 position)
+    {
+        GameObject obj =
+            Instantiate(smokePrefab,
+            position,
+            Quaternion.Euler(new Vector3(0, 0, 0)));
+
+        obj.transform.localScale = new Vector3(0.01f, 0.01f, 0.01f);
+
+        obj.transform.parent = GameObject.Find("Room").transform;
     }
 
     void CastSpell(SpellCard card)
