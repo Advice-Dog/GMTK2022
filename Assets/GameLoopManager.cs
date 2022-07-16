@@ -28,8 +28,6 @@ public class GameLoopManager : MonoBehaviour
 
     private Pawn activePawn = null;
 
-    private int pawnsSpawned = 0;
-
     // Start is called before the first frame update
     void Start()
     {
@@ -44,7 +42,7 @@ public class GameLoopManager : MonoBehaviour
     {
         if (deck.IsHandEmpty())
         {
-            pawnsSpawned = 0;
+            activePawn = null;
             SpawnHand();
         }
     }
@@ -92,17 +90,24 @@ public class GameLoopManager : MonoBehaviour
         List<Card> hand = deck.GetHand();
         for (int i = 0; i < hand.Count; i++)
         {
+            Card card = hand[i];
+
             GameObject obj =
                 Instantiate(prefab,
                 position,
                 Quaternion.Euler(new Vector3(0, -270, 30)));
 
-            obj.name = i.ToString() + ' ' + hand[i].ToString();
+            obj.name = card.ToString();
             obj.transform.parent = plane.transform;
+
+            obj.GetComponent<CardContainer>().SetCard(card);
 
             // Grab the first Text Component
             Text text = obj.GetComponentsInChildren<Text>()[0];
-            text.text = hand[i].ToString();
+            text.text = card.ToString();
+
+            obj.GetComponentsInChildren<Text>()[1].text =
+                card.GetUniqueId().ToString();
 
             position.x += cardWidth + cardSpacer;
         }
@@ -162,25 +167,11 @@ public class GameLoopManager : MonoBehaviour
         {
             if (raycastHit.transform != null)
             {
-                string name =
-                    raycastHit.transform.gameObject.transform.parent.name;
-
-                //Our custom method.
-                Debug
-                    .Log("Name: " + name + ", Tag: " + raycastHit.collider.tag);
-
-                GameObject target = GameObject.Find(name);
-
-                //CurrentClickedGameObject(raycastHit.transform.gameObject);
+                GameObject target =
+                    raycastHit.transform.gameObject.transform.parent.gameObject;
                 if (target.tag == "Card")
                 {
-                    List<Card> hand = deck.GetHand();
-
-                    // taking the positon from the name
-                    int index = Int32.Parse(name.Split(' ')[0]);
-
-                    // find which card they selected
-                    Card card = hand[index];
+                    Card card = target.GetComponent<CardContainer>().GetCard();
                     if (card is SpellCard)
                     {
                         CastSpell((SpellCard) card);
@@ -189,13 +180,13 @@ public class GameLoopManager : MonoBehaviour
                     {
                         SpawnPawn (card);
                     }
-                    deck.RemoveCard (index);
+                    deck.RemoveCard (card);
 
                     Destroy (target);
 
+                    // todo: remove, just for testing, allow the user to end their turn on their own.
                     if (deck.IsHandEmpty())
                     {
-                        // todo: remove, just for testing, allow the user to end their turn on their own.
                         gameState = GameLoopManager.GAME_STATE_SLIDING_OUT;
                     }
                 }
@@ -206,8 +197,16 @@ public class GameLoopManager : MonoBehaviour
     void SpawnPawn(Card card)
     {
         Debug.Log("Player is playing a pawn card.");
+        if (activePawn != null)
+        {
+            Debug
+                .Log("Cannot spawn another pawn when there is an active pawn.");
+            return;
+        }
         GameObject HeroSpawns = GameObject.Find("HeroSpawns");
-        Transform child = HeroSpawns.transform.GetChild(pawnsSpawned);
+
+        // just use the 1st element
+        Transform child = HeroSpawns.transform.GetChild(0);
 
         Vector3 position = child.position;
         position.y += 0.1f;
@@ -219,10 +218,10 @@ public class GameLoopManager : MonoBehaviour
 
         obj.transform.parent = HeroSpawns.transform;
 
+        obj.GetComponent<CardContainer>().SetCard(card);
+
         // todo: should create based on the card
         activePawn = new Pawn();
-
-        pawnsSpawned++;
     }
 
     void CastSpell(SpellCard card)

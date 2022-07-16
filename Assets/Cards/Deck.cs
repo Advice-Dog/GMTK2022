@@ -35,6 +35,11 @@ public class Deck : MonoBehaviour
             cards.Add(new HeroM2());
         }
 
+        if (true)
+        {
+            return;
+        }
+
         // Spell Cards
         for (int i = 0; i < 2; i++)
         {
@@ -100,6 +105,23 @@ public class Deck : MonoBehaviour
         Card card = hand[index];
         hand.RemoveAt (index);
         discardPile.Add (card);
+    }
+
+    public void RemoveCard(Card card)
+    {
+        Debug
+            .Log("Removing card: " +
+            card.ToString() +
+            ", " +
+            card.GetUniqueId().ToString());
+        for (int i = 0; i < hand.Count; i++)
+        {
+            if (card.GetUniqueId() == hand[i].GetUniqueId())
+            {
+                RemoveCard (i);
+                break;
+            }
+        }
     }
 
     public bool IsHandEmpty()

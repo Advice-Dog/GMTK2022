@@ -15,6 +15,8 @@ public interface Card
     {
         
     }
+
+    int GetUniqueId();
 }
 
 
@@ -22,12 +24,18 @@ public interface Card
  * A card that represents a pawn, a spawnable character.
  */
 public class PawnCard : Card {
+
+    // Using a static index to give cards a unique id
+    public static int index = -1;
+    public int id;
     
     public static int COMBAT_TYPE_WARRIOR = 0;
     public static int COMBAT_TYPE_RANGER = 1;
     public static int COMBAT_TYPE_WIZARD = 2;
 
     protected PawnCard(int combatType, int attackDamage, int attackSpeed, int maxHealthPoints, int movementSpeed) {
+        // negative numbers for pawn cards
+        this.id = index--;
         this.combatType = combatType;
         this.attackDamage = attackDamage;
         this.attackSpeed = attackDamage;
@@ -41,10 +49,24 @@ public class PawnCard : Card {
     public int maxHealthPoints;
     public int movementSpeed;
     
+    public int GetUniqueId() {
+        return id;
+    }
 }
 
 public abstract class SpellCard: Card {
 
+    // Using a static index to give cards a unique id
+    public static int index = 1;
+    public int id;
+
+    public SpellCard() {
+        this.id = index++;
+    }
+
     public abstract void ApplyEffect(Pawn pawn);
 
+    public int GetUniqueId() {
+        return id;
+    }
 }
