@@ -50,22 +50,21 @@ public class GameLoopManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (gameState == GameLoopManager.GAME_STATE_BLANK)
+        switch (gameState)
         {
-            gameState = GameLoopManager.GAME_STATE_SLIDING_IN;
-            SpawnRoom();
-        }
-        else if (gameState == GameLoopManager.GAME_STATE_SLIDING_IN)
-        {
-            MoveRoom("Room Center");
-        }
-        else if (gameState == GameLoopManager.GAME_STATE_PLAYING)
-        {
-            Init();
-        }
-        else if (gameState == GameLoopManager.GAME_STATE_SLIDING_OUT)
-        {
-            MoveRoom("Room Despawner");
+            case GameLoopManager.GAME_STATE_BLANK:
+                gameState = GameLoopManager.GAME_STATE_SLIDING_IN;
+                SpawnRoom();
+                break;
+            case GameLoopManager.GAME_STATE_SLIDING_IN:
+                MoveRoom("Room Center");
+                break;
+            case GameLoopManager.GAME_STATE_PLAYING:
+                Init();
+                break;
+            case GameLoopManager.GAME_STATE_SLIDING_OUT:
+                MoveRoom("Room Despawner");
+                break;
         }
 
         //Check for mouse click
