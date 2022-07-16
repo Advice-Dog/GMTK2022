@@ -106,7 +106,11 @@ public abstract class SpellCard : Card
         for (int i = 0; i < effects.Count; i++)
         {
             result += effects[i].GetDescription();
-            if (i != effects.Count - 1)
+            if (effects.Count >= 3 && i == effects.Count - 2)
+            {
+                result += ", and ";
+            }
+            else if (i != effects.Count - 1)
             {
                 result += ", ";
             }
