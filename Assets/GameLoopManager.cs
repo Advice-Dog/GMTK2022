@@ -16,13 +16,15 @@ public class GameLoopManager : MonoBehaviour
 
     private Deck deck;
 
-    private static int GAME_STATE_BLANK = -1;
+    private static int GAME_STATE_BLANK = -999;
 
-    private static int GAME_STATE_SLIDING_IN = 0;
+    private static int GAME_STATE_SLIDING_IN = -9;
 
-    private static int GAME_STATE_PLAYING = 1;
+    private static int GAME_STATE_SPAWN_ENEMIES = -8;
 
-    private static int GAME_STATE_SLIDING_OUT = 2;
+    private static int GAME_STATE_PLAYING = 0;
+
+    private static int GAME_STATE_SLIDING_OUT = 9;
 
     private static float ROOM_SLIDE_SPEED = 3.0f;
 
@@ -60,6 +62,16 @@ public class GameLoopManager : MonoBehaviour
         else if (gameState == GameLoopManager.GAME_STATE_SLIDING_IN)
         {
             MoveRoom("Room Center");
+        }
+        else if (gameState == GAME_STATE_SPAWN_ENEMIES)
+        {
+            // todo: roll the dice, and determine how many enemies
+            int enemyCount = 2;
+            for (int i = 0; i < enemyCount; i++)
+            {
+                SpawnEnemyPawn (i);
+            }
+            gameState = GAME_STATE_PLAYING;
         }
         else if (gameState == GameLoopManager.GAME_STATE_PLAYING)
         {
@@ -178,7 +190,7 @@ public class GameLoopManager : MonoBehaviour
         {
             if (target == "Room Center")
             {
-                gameState = GameLoopManager.GAME_STATE_PLAYING;
+                gameState = GameLoopManager.GAME_STATE_SPAWN_ENEMIES;
             }
             else
             {
@@ -262,6 +274,24 @@ public class GameLoopManager : MonoBehaviour
 
         // todo: should create based on the card
         activePawn = new Pawn();
+    }
+
+    void SpawnEnemyPawn(int index)
+    {
+        Debug.Log("DM is spawning an enemy.");
+        GameObject HeroSpawns = GameObject.Find("EnemySpawns");
+
+        Transform child = HeroSpawns.transform.GetChild(index);
+
+        Vector3 position = child.position;
+        position.y += 0.1f;
+
+        GameObject obj =
+            Instantiate(pawnPrefab,
+            position,
+            Quaternion.Euler(new Vector3(0, 0, 0)));
+
+        obj.transform.parent = HeroSpawns.transform;
     }
 
     void CastSpell(SpellCard card)
