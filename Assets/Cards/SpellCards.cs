@@ -1,84 +1,84 @@
 class Juice : SpellCard
 {
-    public override void ApplyEffect(Pawn pawn)
+    public Juice()
     {
-        pawn.ApplyEffect(new StrengthEffect(1));
+        effects.Add(new StrengthEffect(1));
     }
 }
 
 class GigaJuice : SpellCard
 {
-    public override void ApplyEffect(Pawn pawn)
+    public GigaJuice()
     {
-        pawn.ApplyEffect(new StrengthEffect(2));
-        pawn.ApplyEffect(new SpeedEffect(-25));
+        effects.Add(new StrengthEffect(2));
+        effects.Add(new SpeedEffect(-25));
     }
 }
 
 class Beef : SpellCard
 {
-    public override void ApplyEffect(Pawn pawn)
+    public Beef()
     {
-        pawn.ApplyEffect(new HealthEffect(2));
+        effects.Add(new HealthEffect(2));
     }
 }
 
 class GigaBeef : SpellCard
 {
-    public override void ApplyEffect(Pawn pawn)
+    public GigaBeef()
     {
-        pawn.ApplyEffect(new HealthEffect(4));
-        pawn.ApplyEffect(new StrengthEffect(-1));
+        effects.Add(new HealthEffect(4));
+        effects.Add(new StrengthEffect(-1));
     }
 }
 
 class Dejuice : SpellCard
 {
-    public override void ApplyEffect(Pawn pawn)
+    public Dejuice()
     {
-        pawn.ApplyEffect(new StrengthEffect(-1));
+        effects.Add(new StrengthEffect(-1));
     }
 }
 
 class GigaDejuice : SpellCard
 {
-    public override void ApplyEffect(Pawn pawn)
+    public GigaDejuice()
     {
-        pawn.ApplyEffect(new StrengthEffect(-2));
-        pawn.ApplyEffect(new SpeedEffect(25));
+        effects.Add(new StrengthEffect(-2));
+        effects.Add(new SpeedEffect(25));
     }
 }
 
 class Swiggy : SpellCard
 {
-    public override void ApplyEffect(Pawn pawn)
+    public Swiggy()
     {
-        pawn.ApplyEffect(new SpeedEffect(25));
+        effects.Add(new SpeedEffect(25));
     }
 }
 
 class Kachow : SpellCard
 {
-    public override void ApplyEffect(Pawn pawn)
+    public Kachow()
     {
-        pawn.ApplyEffect(new HealthEffect(-2));
+        effects.Add(new HealthEffect(-2));
     }
 }
 
 class Bazinga : SpellCard
 {
-    public override void ApplyEffect(Pawn pawn)
+    public Bazinga()
     {
-        pawn.ApplyEffect(new HealthEffect(-3));
-        pawn.ApplyEffect(new StrengthEffect(1));
+        effects.Add(new HealthEffect(-3));
+        effects.Add(new StrengthEffect(1));
     }
 }
 
 class Zoom : SpellCard
 {
-    public override void ApplyEffect(Pawn pawn)
+    public Zoom()
     {
-        pawn.ApplyEffect(new MovementSpeedEffect(25));
+        effects.Add(new MovementSpeedEffect(25));
     }
 }
 
@@ -88,27 +88,27 @@ class Zoom : SpellCard
 // Gotta go fast
 class Marcupial : SpellCard
 {
-    public override void ApplyEffect(Pawn pawn)
+    public Marcupial()
     {
-        pawn.ApplyEffect(new StrengthEffect(-3));
-        pawn.ApplyEffect(new SpeedEffect(25));
-        pawn.ApplyEffect(new MovementSpeedEffect(25));
+        effects.Add(new StrengthEffect(-3));
+        effects.Add(new SpeedEffect(25));
+        effects.Add(new MovementSpeedEffect(25));
     }
 }
 
 class BurnBabyBurn : SpellCard
 {
-    public override void ApplyEffect(Pawn pawn)
+    public BurnBabyBurn()
     {
-        pawn.ApplyEffect(new BurnEffect(1, 3));
+        effects.Add(new BurnEffect(1, 3));
     }
 }
 
 class IceIceBaby : SpellCard
 {
-    public override void ApplyEffect(Pawn pawn)
+    public IceIceBaby()
     {
-        pawn.ApplyEffect(new MovementSpeedEffect(-25));
+        effects.Add(new MovementSpeedEffect(-25));
     }
 }
 

@@ -35,11 +35,6 @@ public class Deck : MonoBehaviour
             cards.Add(new HeroM2());
         }
 
-        if (true)
-        {
-            return;
-        }
-
         // Spell Cards
         for (int i = 0; i < 2; i++)
         {

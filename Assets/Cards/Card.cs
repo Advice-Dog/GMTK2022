@@ -4,36 +4,33 @@ using UnityEngine;
 
 public interface Card
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     int GetUniqueId();
 }
-
 
 /**
  * A card that represents a pawn, a spawnable character.
  */
-public class PawnCard : Card {
-
+public class PawnCard : Card
+{
     // Using a static index to give cards a unique id
     public static int index = -1;
+
     public int id;
-    
+
     public static int COMBAT_TYPE_WARRIOR = 0;
+
     public static int COMBAT_TYPE_RANGER = 1;
+
     public static int COMBAT_TYPE_WIZARD = 2;
 
-    protected PawnCard(int combatType, int attackDamage, int attackSpeed, int maxHealthPoints, int movementSpeed) {
+    protected PawnCard(
+        int combatType,
+        int attackDamage,
+        int attackSpeed,
+        int maxHealthPoints,
+        int movementSpeed
+    )
+    {
         // negative numbers for pawn cards
         this.id = index--;
         this.combatType = combatType;
@@ -44,29 +41,81 @@ public class PawnCard : Card {
     }
 
     public int combatType;
+
     public int attackDamage;
+
     public int attackSpeed;
+
     public int maxHealthPoints;
+
     public int movementSpeed;
-    
-    public int GetUniqueId() {
+
+    public int GetUniqueId()
+    {
         return id;
+    }
+
+    public string GetDescription()
+    {
+        if (combatType == COMBAT_TYPE_WARRIOR)
+        {
+            return "Warrior";
+        }
+        if (combatType == COMBAT_TYPE_RANGER)
+        {
+            return "Ranger";
+        }
+        if (combatType == COMBAT_TYPE_WIZARD)
+        {
+            return "Wizard";
+        }
+        return "";
     }
 }
 
-public abstract class SpellCard: Card {
-
+public abstract class SpellCard : Card
+{
     // Using a static index to give cards a unique id
     public static int index = 1;
+
     public int id;
 
-    public SpellCard() {
+    public List<Effect> effects = new List<Effect>();
+
+    public SpellCard()
+    {
         this.id = index++;
     }
 
-    public abstract void ApplyEffect(Pawn pawn);
+    public void ApplyEffect(Pawn pawn)
+    {
+        for (int i = 0; i < effects.Count; i++)
+        {
+            pawn.ApplyEffect(effects[i]);
+        }
+    }
 
-    public int GetUniqueId() {
+    public int GetUniqueId()
+    {
         return id;
+    }
+
+    public string GetDescription()
+    {
+        string result = "";
+        for (int i = 0; i < effects.Count; i++)
+        {
+            result += effects[i].GetDescription();
+            if (i != effects.Count - 1)
+            {
+                result += ", ";
+            }
+            else
+            {
+                result += ".";
+            }
+        }
+
+        return result;
     }
 }

@@ -106,8 +106,40 @@ public class GameLoopManager : MonoBehaviour
             Text text = obj.GetComponentsInChildren<Text>()[0];
             text.text = card.ToString();
 
+            // for debugging
             obj.GetComponentsInChildren<Text>()[1].text =
                 card.GetUniqueId().ToString();
+
+            if (card is SpellCard)
+            {
+                SpellCard spellCard = (SpellCard) card;
+
+                // no power
+                obj.GetComponentsInChildren<Text>()[1].text = "";
+
+                // no power
+                obj.GetComponentsInChildren<Text>()[2].text = "";
+
+                // description
+                obj.GetComponentsInChildren<Text>()[3].text =
+                    spellCard.GetDescription();
+            }
+            else if (card is PawnCard)
+            {
+                PawnCard pawnCard = (PawnCard) card;
+
+                // power
+                obj.GetComponentsInChildren<Text>()[1].text =
+                    pawnCard.attackDamage.ToString();
+
+                // power
+                obj.GetComponentsInChildren<Text>()[2].text =
+                    pawnCard.maxHealthPoints.ToString();
+
+                // description
+                obj.GetComponentsInChildren<Text>()[3].text =
+                    pawnCard.GetDescription();
+            }
 
             position.x += cardWidth + cardSpacer;
         }

@@ -4,17 +4,7 @@ using UnityEngine;
 
 public interface Effect
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public string GetDescription();
 }
 
 public class StrengthEffect: Effect {
@@ -24,6 +14,14 @@ public class StrengthEffect: Effect {
     public StrengthEffect(int amount) {
         this.amount = amount;
     }
+
+    public string GetDescription() {
+        string prefix = "increases";
+        if(amount < 0) {
+            prefix = "decreases";
+        }
+        return prefix + " attack power by " + Mathf.Abs(amount).ToString();
+    }
 }
 
 public class HealthEffect: Effect {
@@ -31,6 +29,14 @@ public class HealthEffect: Effect {
 
     public HealthEffect(int amount) {
         this.amount = amount;
+    }
+
+    public string GetDescription() {
+        string prefix = "increases";
+        if(amount < 0) {
+            prefix = "decreases";
+        }
+        return prefix + " health by " + Mathf.Abs(amount).ToString();
     }
 }
 
@@ -40,6 +46,14 @@ public class SpeedEffect: Effect {
     public SpeedEffect(int amount) {
         this.amount = amount;
     }
+
+    public string GetDescription() {
+        string prefix = "increases";
+        if(amount < 0) {
+            prefix = "decreases";
+        }
+        return prefix + " attack speed by " + Mathf.Abs(amount).ToString() + "%";
+    }
 }
 
 public class MovementSpeedEffect: Effect {
@@ -47,6 +61,14 @@ public class MovementSpeedEffect: Effect {
 
     public MovementSpeedEffect(int amount) {
         this.amount = amount;
+    }
+
+    public string GetDescription() {
+        string prefix = "increases";
+        if(amount < 0) {
+            prefix = "decreases";
+        }
+        return prefix + " movement speed by " + Mathf.Abs(amount).ToString() + "%";
     }
 }
 
@@ -57,5 +79,9 @@ public class BurnEffect : Effect {
     public BurnEffect(int amount, int interval) {
         this.amount = amount;
         this.interval = interval;
+    }
+
+    public string GetDescription() {
+        return "burns the target for " + amount.ToString() + " damage every " + interval + " seconds";
     }
 }
