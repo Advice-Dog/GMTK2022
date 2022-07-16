@@ -177,7 +177,7 @@ public class GameLoopManager : MonoBehaviour
                     List<Card> hand = deck.GetHand();
 
                     // taking the positon from the name
-                    int index = Int32.Parse(name.Split(' ')[0]) - cardsPlayed;
+                    int index = Int32.Parse(name.Split(' ')[0]);
 
                     // find which card they selected
                     Card card = hand[index];
