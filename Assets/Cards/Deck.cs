@@ -24,12 +24,33 @@ public class Deck : MonoBehaviour
     // Adding some default cards to the deck
     void SetDeck()
     {
-        for (int i = 0; i < 10; i++)
+        // Hero Cards
+        for (int i = 0; i < 2; i++)
         {
-            cards.Add(new WarriorCard());
-            cards.Add(new MageCard());
-            cards.Add(new StrengthCard());
+            cards.Add(new HeroW1());
+            cards.Add(new HeroR1());
+            cards.Add(new HeroM1());
+            cards.Add(new HeroW2());
+            cards.Add(new HeroR2());
+            cards.Add(new HeroM2());
         }
+
+        // Spell Cards
+        for (int i = 0; i < 2; i++)
+        {
+            cards.Add(new Juice());
+            cards.Add(new GigaJuice());
+            cards.Add(new Beef());
+            cards.Add(new GigaBeef());
+            cards.Add(new Dejuice());
+            cards.Add(new GigaDejuice());
+            cards.Add(new Swiggy());
+            cards.Add(new Bazinga());
+            cards.Add(new Zoom());
+        }
+        cards.Add(new Kachow());
+        cards.Add(new Marcupial());
+        cards.Add(new BurnBabyBurn());
     }
 
     public void SetHand()

@@ -23,49 +23,28 @@ public interface Card
  */
 public class PawnCard : Card {
     
-    public static int COMBAT_TYPE_MELEE = 0;
-    public static int COMBAT_TYPE_RANGED = 1;
+    public static int COMBAT_TYPE_WARRIOR = 0;
+    public static int COMBAT_TYPE_RANGER = 1;
+    public static int COMBAT_TYPE_WIZARD = 2;
 
-    protected PawnCard(int combatType) {
+    protected PawnCard(int combatType, int attackDamage, int attackSpeed, int maxHealthPoints, int movementSpeed) {
         this.combatType = combatType;
+        this.attackDamage = attackDamage;
+        this.attackSpeed = attackDamage;
+        this.maxHealthPoints = maxHealthPoints;
+        this.movementSpeed = movementSpeed;
     }
 
     public int combatType;
-    public int maxHealthPoints;
-    
-    //todo: should this be added?
-    public int damageAmount;
-
+    public int attackDamage;
     public int attackSpeed;
+    public int maxHealthPoints;
     public int movementSpeed;
     
-}
-
-public class WarriorCard: PawnCard {
-
-    public WarriorCard(): base(PawnCard.COMBAT_TYPE_MELEE) {
-
-    }
-}
-
-public class MageCard: PawnCard {
-
-    public MageCard() : base(PawnCard.COMBAT_TYPE_RANGED) {
-
-    }
-
 }
 
 public abstract class SpellCard: Card {
 
     public abstract void ApplyEffect(Pawn pawn);
-
-}
-
-public class StrengthCard: SpellCard {
-
-    public override void ApplyEffect(Pawn pawn) {
-        pawn.ApplyEffect(new StrengthEffect(2));
-    }
 
 }
