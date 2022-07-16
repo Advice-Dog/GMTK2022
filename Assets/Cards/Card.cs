@@ -110,6 +110,10 @@ public abstract class SpellCard : Card
             {
                 result += ", and ";
             }
+            else if (effects.Count == 2 && i == effects.Count - 2)
+            {
+                result += " and ";
+            }
             else if (i != effects.Count - 1)
             {
                 result += ", ";
