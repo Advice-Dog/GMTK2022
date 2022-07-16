@@ -95,6 +95,13 @@ public class Deck : MonoBehaviour
         hand.Add (card);
     }
 
+    public void RemoveCard(int index)
+    {
+        Card card = hand[index];
+        hand.RemoveAt (index);
+        discardPile.Add (card);
+    }
+
     public List<Card> GetHand()
     {
         return hand;
