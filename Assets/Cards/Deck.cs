@@ -102,6 +102,11 @@ public class Deck : MonoBehaviour
         discardPile.Add (card);
     }
 
+    public bool IsHandEmpty()
+    {
+        return hand.Count == 0;
+    }
+
     public List<Card> GetHand()
     {
         return hand;

@@ -12,8 +12,6 @@ public class GameLoopManager : MonoBehaviour
 
     private Deck deck;
 
-    private bool isFirstUpdate = true;
-
     private static int GAME_STATE_BLANK = -1;
 
     private static int GAME_STATE_SLIDING_IN = 0;
@@ -38,16 +36,18 @@ public class GameLoopManager : MonoBehaviour
         Debug.Log("Created the players deck!");
     }
 
+    void Init()
+    {
+        if (deck.IsHandEmpty())
+        {
+            pawnsSpawned = 0;
+            SpawnHand();
+        }
+    }
+
     // Update is called once per frame
     void Update()
     {
-        if (isFirstUpdate)
-        {
-            Debug.Log("First update, setting player's hand.");
-            isFirstUpdate = false;
-            SpawnHand();
-        }
-
         if (gameState == GameLoopManager.GAME_STATE_BLANK)
         {
             gameState = GameLoopManager.GAME_STATE_SLIDING_IN;
@@ -55,7 +55,15 @@ public class GameLoopManager : MonoBehaviour
         }
         else if (gameState == GameLoopManager.GAME_STATE_SLIDING_IN)
         {
-            MoveRoom();
+            MoveRoom("Room Center");
+        }
+        else if (gameState == GameLoopManager.GAME_STATE_PLAYING)
+        {
+            Init();
+        }
+        else if (gameState == GameLoopManager.GAME_STATE_SLIDING_OUT)
+        {
+            MoveRoom("Room Despawner");
         }
 
         //Check for mouse click
@@ -103,14 +111,28 @@ public class GameLoopManager : MonoBehaviour
         obj.name = "Room";
     }
 
-    void MoveRoom()
+    void DestroyRoom()
+    {
+        Destroy(GameObject.Find("Room"));
+    }
+
+    void MoveRoom(string target)
     {
         GameObject room = GameObject.Find("Room");
-        GameObject roomCenter = GameObject.Find("Room Center");
+        GameObject roomCenter = GameObject.Find(target);
 
         if (room.transform.position == roomCenter.transform.position)
         {
-            gameState = GameLoopManager.GAME_STATE_PLAYING;
+            if (target == "Room Center")
+            {
+                gameState = GameLoopManager.GAME_STATE_PLAYING;
+            }
+            else
+            {
+                DestroyRoom();
+                gameState = GameLoopManager.GAME_STATE_BLANK;
+            }
+
             return;
         }
 
@@ -165,6 +187,12 @@ public class GameLoopManager : MonoBehaviour
                     deck.RemoveCard (index);
 
                     Destroy (target);
+
+                    if (deck.IsHandEmpty())
+                    {
+                        // todo: remove, just for testing, allow the user to end their turn on their own.
+                        gameState = GameLoopManager.GAME_STATE_SLIDING_OUT;
+                    }
                 }
             }
         }
