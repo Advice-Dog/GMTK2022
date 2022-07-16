@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameLoopManager : MonoBehaviour
 {
@@ -95,6 +96,10 @@ public class GameLoopManager : MonoBehaviour
 
             obj.name = hand[i].ToString();
             obj.transform.parent = plane.transform;
+
+            // Grab the first Text Component
+            Text text = obj.GetComponentsInChildren<Text>()[0];
+            text.text = hand[i].ToString();
 
             position.x += cardWidth + cardSpacer;
         }
