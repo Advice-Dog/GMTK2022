@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -24,6 +25,8 @@ public class GameLoopManager : MonoBehaviour
     private static float ROOM_SLIDE_SPEED = 3.0f;
 
     private int gameState = GAME_STATE_BLANK;
+
+    private Pawn activePawn = null;
 
     private int pawnsSpawned = 0;
 
@@ -94,7 +97,7 @@ public class GameLoopManager : MonoBehaviour
                 position,
                 Quaternion.Euler(new Vector3(0, -270, 30)));
 
-            obj.name = hand[i].ToString();
+            obj.name = i.ToString() + ' ' + hand[i].ToString();
             obj.transform.parent = plane.transform;
 
             // Grab the first Text Component
@@ -173,21 +176,18 @@ public class GameLoopManager : MonoBehaviour
                 {
                     List<Card> hand = deck.GetHand();
 
-                    int index = 0;
+                    // taking the positon from the name
+                    int index = Int32.Parse(name.Split(' ')[0]) - cardsPlayed;
 
                     // find which card they selected
                     Card card = hand[index];
                     if (card is SpellCard)
                     {
-                        Debug.Log("Player is playing a spell card.");
-                        // todo: allow the player to select the target
+                        CastSpell((SpellCard) card);
                     }
                     else if (card is PawnCard)
                     {
-                        Debug.Log("Player is playing a pawn card.");
-
-                        // todo: spawn a pawn on the board
-                        SpawnPawn();
+                        SpawnPawn (card);
                     }
                     deck.RemoveCard (index);
 
@@ -203,8 +203,9 @@ public class GameLoopManager : MonoBehaviour
         }
     }
 
-    void SpawnPawn()
+    void SpawnPawn(Card card)
     {
+        Debug.Log("Player is playing a pawn card.");
         GameObject HeroSpawns = GameObject.Find("HeroSpawns");
         Transform child = HeroSpawns.transform.GetChild(pawnsSpawned);
 
@@ -218,6 +219,21 @@ public class GameLoopManager : MonoBehaviour
 
         obj.transform.parent = HeroSpawns.transform;
 
+        // todo: should create based on the card
+        activePawn = new Pawn();
+
         pawnsSpawned++;
+    }
+
+    void CastSpell(SpellCard card)
+    {
+        Debug.Log("Player is playing a spell card.");
+        if (activePawn == null)
+        {
+            Debug.Log("Cannot cast a spell when there is no active pawn.");
+            return;
+        }
+
+        card.ApplyEffect (activePawn);
     }
 }
