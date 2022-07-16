@@ -10,7 +10,9 @@ public class GameLoopManager : MonoBehaviour
 
     public GameObject pawnPrefab;
 
-    public GameObject roomPrefab;
+    private int roomIndex = 0;
+
+    private static int MAX_ROOM_COUNT = 5;
 
     private Deck deck;
 
@@ -147,6 +149,12 @@ public class GameLoopManager : MonoBehaviour
 
     void SpawnRoom()
     {
+        int index = roomIndex++ % MAX_ROOM_COUNT;
+
+        GameObject roomPrefab =
+            (GameObject)
+            Resources.Load("prefabs/Room " + index, typeof (GameObject));
+
         // Starting point to spawn the room at
         GameObject roomSpawner = GameObject.Find("Room Spawner");
         GameObject obj =
