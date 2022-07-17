@@ -24,12 +24,12 @@ public class Deck : MonoBehaviour
     void SetDeck()
     {
         // Hero Cards
-        heros.Add(new HeroW1());
-        heros.Add(new HeroR1());
-        heros.Add(new HeroM1());
-        heros.Add(new HeroW2());
-        heros.Add(new HeroR2());
-        heros.Add(new HeroM2());
+        heros.Add(new Tank());
+        heros.Add(new Rogue());
+        heros.Add(new Hunter());
+        heros.Add(new Scout());
+        heros.Add(new Necromancer());
+        heros.Add(new Mage());
 
         // Spell Cards
         spells.Add(new Cripple());
