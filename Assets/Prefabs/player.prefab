@@ -618,14 +618,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f850348e1dcafee438cac85ce2c3086a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentHealth: 0
+  healthBar: {fileID: 0}
+  attackDamage: 0
   walkingSpeed: 2
   runningSpeed: 4
+  canJump: 1
   jumpSpeed: 3
   gravity: 10
   playerCamera: {fileID: 5108414517800246417}
   lookSpeed: 2
   lookXLimit: 45
+  weapon: {fileID: 0}
+  wepRot: {x: 0, y: 0, z: 0}
   fireDelta: 0.5
+  damageDelta: 0
+  m_someOtherScriptOnAnotherGameObject: {fileID: 0}
+  deathAnimator: {fileID: 0}
+  death: {fileID: 0}
   canMove: 1
 --- !u!1 &6862167422195653684
 GameObject:

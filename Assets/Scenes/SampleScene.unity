@@ -1173,6 +1173,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1965257165}
     m_Modifications:
+    - target: {fileID: 1286649108497707558, guid: 6ca7ce04097b3b2449c3cddc2c104b46, type: 3}
+      propertyPath: m_TagString
+      value: PlayerAttack
+      objectReference: {fileID: 0}
     - target: {fileID: 3107909232279276888, guid: 6ca7ce04097b3b2449c3cddc2c104b46, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -1236,6 +1240,10 @@ PrefabInstance:
     - target: {fileID: 7254330263052897647, guid: 6ca7ce04097b3b2449c3cddc2c104b46, type: 3}
       propertyPath: m_Name
       value: wand
+      objectReference: {fileID: 0}
+    - target: {fileID: 7814796465473380348, guid: 6ca7ce04097b3b2449c3cddc2c104b46, type: 3}
+      propertyPath: m_TagString
+      value: PlayerAttack
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6ca7ce04097b3b2449c3cddc2c104b46, type: 3}
@@ -2781,6 +2789,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5108414517332481678, guid: 2733a796d7d4d67419b947336686e897, type: 3}
+      propertyPath: death
+      value: 
+      objectReference: {fileID: 910241889}
     - target: {fileID: 5108414517332481678, guid: 2733a796d7d4d67419b947336686e897, type: 3}
       propertyPath: weapon
       value: 

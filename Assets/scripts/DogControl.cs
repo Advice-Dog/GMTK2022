@@ -12,6 +12,16 @@ public class DogControl : MonoBehaviour
     public Transform castLocation;
     NavMeshAgent agent;
 
+    public int currentHealth;
+
+    public float fireDelta;
+    private float nextFire;
+    private float myTime;
+
+    public float damageDelta;
+    private float nextDamage;
+    private float myTimeDamage;
+
     //animation variables
     public Animator enemy_Animator;
     bool cast = false;
@@ -27,7 +37,7 @@ public class DogControl : MonoBehaviour
         //NavSpeed = GetComponent<NavMeshAgent>().speed;
         //This gets the Animator, which should be attached to the GameObject you are intending to animate.
 
-        Walk.volume = Random.Range(0.3f, 0.5f);
+        Walk.volume = Random.Range(3.9f, 7.5f);
         Walk.pitch = Random.Range(0.2f, 0.3f);
         Walk.Play();
 
@@ -38,6 +48,9 @@ public class DogControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        myTimeDamage = myTimeDamage + Time.deltaTime;
+
+
         //float distance = Vector3.Distance(target.position, castLocation.position);
         //Debug.Log(distance);
         agent.SetDestination(target.position);
@@ -70,6 +83,19 @@ public class DogControl : MonoBehaviour
         if (other.gameObject.tag == "attackRange")
         {
          
+        }
+    }
+
+    void OnParticleCollision(GameObject other)
+    {
+        Debug.Log("FUCKKK");
+        if (other.gameObject.tag == "PlayerAttack")// && myTimeDamage > nextDamage)
+        {
+            currentHealth = currentHealth - 1;
+            nextDamage = myTimeDamage + damageDelta;
+            Debug.Log("you hit an enemy!");
+            nextDamage = nextDamage - myTimeDamage;
+            myTimeDamage = 0.0F; 
         }
     }
 }
