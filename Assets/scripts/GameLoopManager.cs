@@ -69,6 +69,8 @@ public class GameLoopManager : MonoBehaviour
 
     private List<Enemy> enemyList = null;
 
+    private List<string> postEncounterStory = new List<string>();
+
     // Start is called before the first frame update
     void Start()
     {
@@ -85,6 +87,15 @@ public class GameLoopManager : MonoBehaviour
         GameObject obj = new GameObject("Deck");
         deck = obj.AddComponent<Deck>();
         Debug.Log("Created the players deck!");
+
+        postEncounterStory.Add("You clear the small room and continue on.");
+        postEncounterStory
+            .Add("After killing your foe, you slowly make your way to the next room.");
+        postEncounterStory
+            .Add("With hands drenched in blood, you are wary of what's to come.");
+        postEncounterStory
+            .Add("You step over the fallen corpse of the enemies.");
+        postEncounterStory.Add("Nothing stands in your way.");
 
         SetSubtitles("Shall we play a game?");
     }
@@ -461,7 +472,6 @@ public class GameLoopManager : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
 
-
         //mainCamera.enabled = false;
         //audioListener.enabled = false;
         battleRoom.SetActive(true);
@@ -555,6 +565,9 @@ public class GameLoopManager : MonoBehaviour
             deathAnimator.SetBool("isTilt", true);
 
             gameState = GameLoopManager.GAME_STATE_WAITING;
+
+            SetSubtitles(postEncounterStory[roomIndex %
+            postEncounterStory.Count]);
 
             Invoke("PostEndEncounter", 2);
         }
