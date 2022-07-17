@@ -37,10 +37,6 @@ public class Deck : MonoBehaviour
 
         spells.Add(new Feeble(-10));
         spells.Add(new Fragile(-5));
-        spells.Add(new PlagueCarrier(1));
-
-        // todo: remove
-        spells.Add(new Blind());
     }
 
     public void SetAdvancedDeck()

@@ -59,7 +59,7 @@ public class pc1 : MonoBehaviour
     public GameLoopManager m_someOtherScriptOnAnotherGameObject;
 
     public Animator deathAnimator;
-    
+
     public GameObject death;
 
     public GameObject weaponParticle;
@@ -79,7 +79,7 @@ public class pc1 : MonoBehaviour
         walkingSpeed = DEFAULT_WALKING_SPEED;
         runningSpeed = DEFAULT_RUNNING_SPEED;
         jumpSpeed = DEFAULT_JUMP_SPEED;
-        fireDelta = DEFAULT_ATTACK_DELAY/10;
+        fireDelta = DEFAULT_ATTACK_DELAY / 10;
         myTime = 0.0f;
         canJump = true;
     }
@@ -87,15 +87,21 @@ public class pc1 : MonoBehaviour
     void Start()
     {
         characterController = GetComponent<CharacterController>();
-        weaponParticle.SetActive(false);
-        // Lock cursor
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
 
-        if (fireDelta < 1) { fireDelta = 1.25f; }
+        weaponParticle.SetActive(false);
+
+        if (fireDelta < 1)
+        {
+            fireDelta = 1.25f;
+        }
 
         deathAnimator = death.GetComponent<Animator>();
         deathAnimator.SetBool("isArena", true);
+    }
+
+    void OnDisable()
+    {
+        healthBar.text = "";
     }
 
     void Update()
@@ -107,9 +113,7 @@ public class pc1 : MonoBehaviour
         {
             //GameLoopManager.EndEncouter();
             healthBar.text = "";
-            // unLock cursor
-            Cursor.lockState = CursorLockMode.None;
-            Cursor.visible = true;
+
             deathAnimator.SetBool("isArena", false);
             deathAnimator.SetBool("isThrow", true);
             m_someOtherScriptOnAnotherGameObject.EndEncouter(false);
