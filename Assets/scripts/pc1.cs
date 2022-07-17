@@ -42,13 +42,11 @@ public class pc1 : MonoBehaviour
 
     public float fireDelta;
 
-    private float nextFire;
+    public float fireWait;
 
     private float myTime;
 
     public float damageDelta;
-
-    private float nextDamage;
 
     private float myTimeDamage;
 
@@ -64,6 +62,10 @@ public class pc1 : MonoBehaviour
     
     public GameObject death;
 
+    public GameObject weaponParticle;
+
+    public AudioSource Attack;
+
     [HideInInspector]
     public bool canMove = true;
 
@@ -77,8 +79,7 @@ public class pc1 : MonoBehaviour
         walkingSpeed = DEFAULT_WALKING_SPEED;
         runningSpeed = DEFAULT_RUNNING_SPEED;
         jumpSpeed = DEFAULT_JUMP_SPEED;
-        fireDelta = DEFAULT_ATTACK_DELAY;
-        nextFire = fireDelta;
+        fireDelta = DEFAULT_ATTACK_DELAY/10;
         myTime = 0.0f;
         canJump = true;
     }
@@ -86,10 +87,12 @@ public class pc1 : MonoBehaviour
     void Start()
     {
         characterController = GetComponent<CharacterController>();
-
+        weaponParticle.SetActive(false);
         // Lock cursor
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+
+        if (fireDelta < 1) { fireDelta = 1.25f; }
 
         deathAnimator = death.GetComponent<Animator>();
         deathAnimator.SetBool("isArena", true);
@@ -169,13 +172,14 @@ public class pc1 : MonoBehaviour
         myTime = myTime + Time.deltaTime;
         myTimeDamage = myTimeDamage + Time.deltaTime;
 
-        if (Input.GetMouseButtonDown(0) && myTime > nextFire)
+        if (myTime <= fireDelta && myTime >= fireWait)
         {
-            nextFire = myTime + fireDelta;
-            Debug.Log("you attacked");
-            weapon.Rotate(wepRot * Time.deltaTime);
-            nextFire = nextFire - myTime;
+            weaponParticle.SetActive(false);
+        }
+        else if (Input.GetKey("f") && myTime >= fireDelta)
+        {
             myTime = 0.0F;
+            weaponParticle.SetActive(true);
         }
     }
 
@@ -198,14 +202,12 @@ public class pc1 : MonoBehaviour
 
     void OnParticleCollision(GameObject other)
     {
-        if (other.gameObject.tag == "EnemyAttack" && myTimeDamage > nextDamage)
+        if (other.gameObject.tag == "EnemyAttack" && myTimeDamage > damageDelta)
         {
             currentHealth = currentHealth - 1;
-            nextDamage = myTimeDamage + damageDelta;
             Debug.Log("you were hit");
-            nextDamage = nextDamage - myTimeDamage;
             myTimeDamage = 0.0F;
-            healthBar.text = "Health:" + currentHealth;
+            healthBar.text = "Health: " + currentHealth;
         }
     }
 }

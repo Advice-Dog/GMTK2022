@@ -6,6 +6,10 @@ using UnityEngine.AI;
 
 public class DogControl : MonoBehaviour
 {
+    private static float DEFAULT_WALKING_SPEED = 7.5f;
+
+    private static float DEFAULT_ATTACK_DELAY = 0.5f;
+
     public float lookRadius = 30.0f;
     public float jumpRadius = 15.0f;
     public Transform target;
@@ -14,12 +18,13 @@ public class DogControl : MonoBehaviour
 
     public int currentHealth;
 
+    public GameObject weaponParticle;
+
     public float fireDelta;
-    private float nextFire;
     private float myTime;
+    public float fireWait;
 
     public float damageDelta;
-    private float nextDamage;
     private float myTimeDamage;
 
     //animation variables
@@ -29,9 +34,27 @@ public class DogControl : MonoBehaviour
     public AudioSource Attack;
     public AudioSource Walk;
 
+    public TMPro.TextMeshProUGUI healthBar;
+
+    public GameLoopManager m_someOtherScriptOnAnotherGameObject;
+
+    public DogControl()
+    {
+        SetDefaultValues();
+    }
+
+    void SetDefaultValues()
+    {
+        GetComponent<NavMeshAgent>().speed = DEFAULT_WALKING_SPEED;
+        fireDelta = DEFAULT_ATTACK_DELAY / 10;
+        myTime = 0.0f;
+    }
+
+
     // Start is called before the first frame update
     void Start()
     {
+        weaponParticle.SetActive(false);
         agent = GetComponent<NavMeshAgent>();
 
         //NavSpeed = GetComponent<NavMeshAgent>().speed;
@@ -49,19 +72,29 @@ public class DogControl : MonoBehaviour
     void Update()
     {
         myTimeDamage = myTimeDamage + Time.deltaTime;
+        myTime = myTime + Time.deltaTime;
 
+        //Debug.Log(myTime);
 
-        //float distance = Vector3.Distance(target.position, castLocation.position);
-        //Debug.Log(distance);
         agent.SetDestination(target.position);
-        if (cast)
+        if (myTime <= fireDelta && myTime >= fireWait)
         {
+            //Debug.Log("enemy particle animation off");
+            weaponParticle.SetActive(false);
+            enemy_Animator.SetBool("isWalk", true);
+            enemy_Animator.SetBool("isCast", false);
+        }
+        else if (cast && myTime >= fireDelta)
+        {
+            myTime = 0.0F;
+
             Attack.volume = Random.Range(0.3f, 0.5f);
             Attack.pitch = Random.Range(0.6f, 0.8f);
-            //Debug.Log("attack");
+            //Debug.Log("enemy attacks");
             enemy_Animator.SetBool("isWalk", false);
             enemy_Animator.SetBool("isCast", true);
             Attack.Play();
+            weaponParticle.SetActive(true);
             cast = false;
         }
         else
@@ -88,14 +121,26 @@ public class DogControl : MonoBehaviour
 
     void OnParticleCollision(GameObject other)
     {
-        Debug.Log("FUCKKK");
-        if (other.gameObject.tag == "PlayerAttack")// && myTimeDamage > nextDamage)
+        if (other.gameObject.tag == "PlayerAttack" && myTimeDamage > damageDelta)
         {
             currentHealth = currentHealth - 1;
-            nextDamage = myTimeDamage + damageDelta;
-            Debug.Log("you hit an enemy!");
-            nextDamage = nextDamage - myTimeDamage;
+            Debug.Log("enemy health: " + currentHealth);
             myTimeDamage = 0.0F; 
         }
     }
+
+
+    public void SetEnemyStats(Pawn pawn)
+    {
+        Debug.Log(pawn.ToString());
+
+        // reset to default
+        SetDefaultValues();
+        currentHealth = pawn.maxHealthPoints;
+        //attackDamage = pawn.attackDamage;
+        fireDelta *= (100f / pawn.attackSpeed);
+        GetComponent<NavMeshAgent>().speed *= (pawn.movementSpeed / 100f);
+    }
+
+    
 }
