@@ -19,7 +19,15 @@ public class GameLoopManager : MonoBehaviour
 
     public Camera mainCamera;
 
+    public GameObject mainCameraObj;
+
+    public AudioListener audioListener; 
+
     public GameObject battleRoom;
+
+    public Animator deathAnimator;
+
+    public GameObject death;
 
     AudioSource backgroundMusic;
 
@@ -67,6 +75,9 @@ public class GameLoopManager : MonoBehaviour
         // just to allow us to keep battle room visible in editor
         EndEncouter(true);
 
+        deathAnimator = death.GetComponent<Animator>();
+
+        //audioListener = mainCameraObj.GetComponant<AudioListener>();
         backgroundMusic = GetComponent<AudioSource>();
         backgroundMusic.Play();
 
@@ -441,7 +452,9 @@ public class GameLoopManager : MonoBehaviour
 
         Debug.Log("pawn: " + activePawn.ToString());
 
-        mainCamera.enabled = false;
+        mainCameraObj.SetActive(false);
+        //mainCamera.enabled = false;
+        //audioListener.enabled = false;
         battleRoom.SetActive(true);
 
         for (int i = 0; i < enemyList.Count; i++)
@@ -504,8 +517,10 @@ public class GameLoopManager : MonoBehaviour
     {
         if (isAlive)
         {
-            mainCamera.enabled = true;
-            battleRoom.SetActive(false);
+            //mainCamera.enabled = true;
+        mainCameraObj.SetActive(true);
+        battleRoom.SetActive(false);
+        deathAnimator.SetBool("isTilt", true);
         }
         else
         {
