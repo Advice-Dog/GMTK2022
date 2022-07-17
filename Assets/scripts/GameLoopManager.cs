@@ -473,6 +473,7 @@ public class GameLoopManager : MonoBehaviour
         Cursor.visible = false;
 
         mainCameraObj.SetActive(false);
+
         //mainCamera.enabled = false;
         //audioListener.enabled = false;
         battleRoom.SetActive(true);
@@ -607,6 +608,11 @@ public class GameLoopManager : MonoBehaviour
         Debug.Log("Subtitles: " + message);
         subtitles.text = message;
         Invoke("ClearSubtitles", Math.Max(1, message.Length / 20));
+    }
+
+    public void ShowWeaponHint(string hint)
+    {
+        subtitles.text = hint;
     }
 
     void ClearSubtitles()
