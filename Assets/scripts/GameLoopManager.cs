@@ -35,6 +35,8 @@ public class GameLoopManager : MonoBehaviour
 
     AudioSource rollSound;
 
+    AudioSource deathVoice;
+
     public TMPro.TextMeshProUGUI subtitles;
 
     private int roomIndex = 0;
@@ -83,10 +85,12 @@ public class GameLoopManager : MonoBehaviour
         deathAnimator = death.GetComponent<Animator>();
 
         //audioListener = mainCameraObj.GetComponant<AudioListener>();
-        backgroundMusic = GetComponents<AudioSource>()[0];
-        backgroundMusic.Play();
+        AudioSource[] audioSources = GetComponents<AudioSource>();
+        backgroundMusic = audioSources[0];
+        rollSound = audioSources[1];
+        deathVoice = audioSources[2];
 
-        rollSound = GetComponents<AudioSource>()[1];
+        backgroundMusic.Play();
 
         GameObject obj = new GameObject("Deck");
         deck = obj.AddComponent<Deck>();
@@ -139,6 +143,12 @@ public class GameLoopManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // stopping any audio once the subtitles disappear
+        if (subtitles.text == "")
+        {
+            deathVoice.Stop();
+        }
+
         if (gameState == GameLoopManager.GAME_STATE_BLANK)
         {
             gameState = GameLoopManager.GAME_STATE_SLIDING_IN;
@@ -608,6 +618,8 @@ public class GameLoopManager : MonoBehaviour
 
     void SetSubtitles(string message)
     {
+        deathVoice.Play();
+
         // prefix with name
         message = "Death: " + message;
         Debug.Log("Subtitles: " + message);
