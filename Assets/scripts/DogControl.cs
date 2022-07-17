@@ -10,6 +10,8 @@ public class DogControl : MonoBehaviour
 
     private static float DEFAULT_ATTACK_DELAY = 0.5f;
 
+    public int attackDamage;
+
     public float lookRadius = 30.0f;
     public float jumpRadius = 15.0f;
     public Transform target;
@@ -20,12 +22,15 @@ public class DogControl : MonoBehaviour
 
     public GameObject weaponParticle;
 
+    public GameObject player;
+
     public float fireDelta;
     private float myTime;
     public float fireWait;
 
     public float damageDelta;
     private float myTimeDamage;
+    public int damageTaken;
 
     //animation variables
     public Animator enemy_Animator;
@@ -33,10 +38,6 @@ public class DogControl : MonoBehaviour
 
     public AudioSource Attack;
     public AudioSource Walk;
-
-    public TMPro.TextMeshProUGUI healthBar;
-
-    public GameLoopManager m_someOtherScriptOnAnotherGameObject;
 
     public DogControl()
     {
@@ -54,6 +55,7 @@ public class DogControl : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        damageTaken = player.GetComponent<pc1>().attackDamage;
         weaponParticle.SetActive(false);
         agent = GetComponent<NavMeshAgent>();
 
@@ -66,6 +68,8 @@ public class DogControl : MonoBehaviour
 
         enemy_Animator.SetBool("isWalk", true);
         enemy_Animator.SetBool("isCast", false);
+
+        if (fireDelta < 1) { fireDelta = 1.25f; }
     }
 
     // Update is called once per frame
@@ -123,7 +127,7 @@ public class DogControl : MonoBehaviour
     {
         if (other.gameObject.tag == "PlayerAttack" && myTimeDamage > damageDelta)
         {
-            currentHealth = currentHealth - 1;
+            currentHealth = currentHealth - damageTaken;
             Debug.Log("enemy health: " + currentHealth);
             myTimeDamage = 0.0F; 
         }
@@ -137,7 +141,7 @@ public class DogControl : MonoBehaviour
         // reset to default
         SetDefaultValues();
         currentHealth = pawn.maxHealthPoints;
-        //attackDamage = pawn.attackDamage;
+        attackDamage = pawn.attackDamage;
         fireDelta *= (100f / pawn.attackSpeed);
         GetComponent<NavMeshAgent>().speed *= (pawn.movementSpeed / 100f);
     }

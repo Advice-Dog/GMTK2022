@@ -9788,14 +9788,14 @@ MonoBehaviour:
   castLocation: {fileID: 3843487980750676027}
   currentHealth: 4
   weaponParticle: {fileID: 3843487980594331294}
+  player: {fileID: 0}
   fireDelta: 5.02
-  fireWait: 2
+  fireWait: 1
   damageDelta: 1
+  damageTaken: 0
   enemy_Animator: {fileID: 7222747261429868049}
   Attack: {fileID: 3843487980750676025}
   Walk: {fileID: 6464855027514443228}
-  healthBar: {fileID: 0}
-  m_someOtherScriptOnAnotherGameObject: {fileID: 0}
 --- !u!82 &3843487980750676025
 AudioSource:
   m_ObjectHideFlags: 0

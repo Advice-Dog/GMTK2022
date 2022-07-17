@@ -494,6 +494,7 @@ public class GameLoopManager : MonoBehaviour
             Quaternion.Euler(new Vector3(0, 0, 0)));
 
         obj.GetComponent<DogControl>().target = player.transform;
+        obj.GetComponent<DogControl>().player = player;
         obj.GetComponent<DogControl>().SetEnemyStats(activePawn);
     }
 
