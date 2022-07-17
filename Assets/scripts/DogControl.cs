@@ -87,6 +87,10 @@ public class DogControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (currentHealth <= 0)
+        {
+            enemy_Animator.SetBool("isDie", true);
+        }
         healthBar.text = currentHealth.ToString();
 
         myTimeDamage = myTimeDamage + Time.deltaTime;

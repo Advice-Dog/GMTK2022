@@ -5115,7 +5115,7 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 1.5
+      scalar: 1.74
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -5661,7 +5661,7 @@ ParticleSystem:
     serializedVersion: 6
     enabled: 1
     type: 4
-    angle: 0.46
+    angle: 0.61
     length: 5
     boxThickness: {x: 0, y: 0, z: 0}
     radiusThickness: 1
@@ -5747,7 +5747,7 @@ ParticleSystem:
     sphericalDirectionAmount: 0
     randomPositionAmount: 0
     radius:
-      value: 0.05
+      value: 0.29
       mode: 0
       spread: 0
       speed:
@@ -9884,20 +9884,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a418a37336f888f49b23c2c4e8adba34, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackDamage: 0
   lookRadius: 10
   jumpRadius: 2
   target: {fileID: 0}
   castLocation: {fileID: 3843487980750676027}
   currentHealth: 4
   weaponParticle: {fileID: 3843487980594331294}
+  player: {fileID: 0}
   fireDelta: 5.02
   fireWait: 2
   damageDelta: 1
+  damageTaken: 0
+  healthBar: {fileID: 7895163467181407486}
   enemy_Animator: {fileID: 7222747261429868049}
   Attack: {fileID: 3843487980750676025}
   Walk: {fileID: 6464855027514443228}
-  healthBar: {fileID: 7895163467181407486}
-  m_someOtherScriptOnAnotherGameObject: {fileID: 0}
 --- !u!82 &3843487980750676025
 AudioSource:
   m_ObjectHideFlags: 0
