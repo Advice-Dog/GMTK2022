@@ -32,18 +32,12 @@ public class Deck : MonoBehaviour
         heros.Add(new HeroM2());
 
         // Spell Cards
-        spells.Add(new Juice());
-        spells.Add(new GigaJuice());
-        spells.Add(new Beef());
-        spells.Add(new GigaBeef());
-        spells.Add(new Dejuice());
-        spells.Add(new GigaDejuice());
-        spells.Add(new Swiggy());
-        spells.Add(new Bazinga());
-        spells.Add(new Zoom());
-        spells.Add(new Kachow());
-        spells.Add(new Marcupial());
-        spells.Add(new BurnBabyBurn());
+        spells.Add(new Cripple());
+        spells.Add(new WingsClipped());
+        spells.Add(new Feeble());
+        spells.Add(new Fragile());
+        spells.Add(new Blind());
+        spells.Add(new PlagueCarrier());
     }
 
     public void DrawPawns()

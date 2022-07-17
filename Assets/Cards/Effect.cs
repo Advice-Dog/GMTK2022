@@ -32,6 +32,10 @@ public class HealthEffect: Effect {
     }
 
     public string GetDescription() {
+        if(amount == -99) {
+            return "you will die in 1 hit";
+        }
+
         string prefix = "increases";
         if(amount < 0) {
             prefix = "decreases";
@@ -82,6 +86,26 @@ public class BurnEffect : Effect {
     }
 
     public string GetDescription() {
-        return "burns the target for " + amount.ToString() + " damage every " + interval + " seconds";
+        return "take " + amount.ToString() + " poison damage every " + interval + " seconds";
+    }
+}
+
+public class NoJumpEffect : Effect {
+    public NoJumpEffect() {
+
+    }
+
+    public string GetDescription() {
+        return "you can no longer jump";
+    }
+}
+
+public class BlindEffect : Effect {
+    public BlindEffect() {
+
+    }
+
+    public string GetDescription() {
+        return "it's getting darker";
     }
 }

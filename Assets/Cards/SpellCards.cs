@@ -1,120 +1,47 @@
-class Juice : SpellCard
+class Cripple : SpellCard
 {
-    public Juice()
+    public Cripple()
     {
-        effects.Add(new StrengthEffect(1));
-    }
-}
-
-class GigaJuice : SpellCard
-{
-    public GigaJuice()
-    {
-        effects.Add(new StrengthEffect(2));
         effects.Add(new SpeedEffect(-25));
     }
 }
 
-class Beef : SpellCard
+class WingsClipped : SpellCard
 {
-    public Beef()
+    public WingsClipped()
     {
-        effects.Add(new HealthEffect(2));
+        effects.Add(new NoJumpEffect());
     }
 }
 
-class GigaBeef : SpellCard
+class PlagueCarrier : SpellCard
 {
-    public GigaBeef()
-    {
-        effects.Add(new HealthEffect(4));
-        effects.Add(new StrengthEffect(-1));
-    }
-}
-
-class Dejuice : SpellCard
-{
-    public Dejuice()
-    {
-        effects.Add(new StrengthEffect(-1));
-    }
-}
-
-class GigaDejuice : SpellCard
-{
-    public GigaDejuice()
-    {
-        effects.Add(new StrengthEffect(-2));
-        effects.Add(new SpeedEffect(25));
-    }
-}
-
-class Swiggy : SpellCard
-{
-    public Swiggy()
-    {
-        effects.Add(new SpeedEffect(25));
-    }
-}
-
-class Kachow : SpellCard
-{
-    public Kachow()
-    {
-        effects.Add(new HealthEffect(-2));
-    }
-}
-
-class Bazinga : SpellCard
-{
-    public Bazinga()
-    {
-        effects.Add(new HealthEffect(-3));
-        effects.Add(new StrengthEffect(1));
-    }
-}
-
-class Zoom : SpellCard
-{
-    public Zoom()
-    {
-        effects.Add(new MovementSpeedEffect(25));
-    }
-}
-
-// Tubular Exit
-// Swerve
-// Slowbro
-// Gotta go fast
-class Marcupial : SpellCard
-{
-    public Marcupial()
-    {
-        effects.Add(new StrengthEffect(-3));
-        effects.Add(new SpeedEffect(25));
-        effects.Add(new MovementSpeedEffect(25));
-    }
-}
-
-class BurnBabyBurn : SpellCard
-{
-    public BurnBabyBurn()
+    public PlagueCarrier()
     {
         effects.Add(new BurnEffect(1, 3));
     }
 }
 
-class IceIceBaby : SpellCard
+class Feeble : SpellCard
 {
-    public IceIceBaby()
+    public Feeble()
     {
-        effects.Add(new MovementSpeedEffect(-25));
+        effects.Add(new StrengthEffect(-25));
     }
 }
 
-// Ligma
-// Sigma
-// Bricked up
-// Laser beams
-// Pew pew
-// Bananaphone
+class Fragile : SpellCard
+{
+    public Fragile()
+    {
+        effects.Add(new HealthEffect(-99));
+    }
+}
+
+class Blind : SpellCard
+{
+    public Blind()
+    {
+        effects.Add(new BlindEffect());
+    }
+}

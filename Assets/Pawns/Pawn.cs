@@ -21,6 +21,10 @@ public class Pawn
     // todo: possibly use a list of effects instead.
     public bool isOnFire = false;
 
+    public bool canJump = true;
+
+    public bool isBlind = false;
+
     public Pawn()
     {
     }
@@ -49,6 +53,14 @@ public class Pawn
         else if (effect is BurnEffect)
         {
             isOnFire = true;
+        }
+        else if (effect is NoJumpEffect)
+        {
+            canJump = false;
+        }
+        else if (effect is BlindEffect)
+        {
+            isBlind = true;
         }
     }
 }
