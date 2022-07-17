@@ -75,3 +75,6 @@ crashlytics-build.properties
 
 Assets/RogueNoodle/*
 Assets/RogueNoodle.meta
+
+Build WebGL/*
+*.gz
