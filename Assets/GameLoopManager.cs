@@ -12,6 +12,10 @@ public class GameLoopManager : MonoBehaviour
 
     public GameObject smokePrefab;
 
+    public GameObject arenaEnemyPrefab;
+
+    public GameObject player;
+
     public Camera mainCamera;
 
     public GameObject battleRoom;
@@ -48,10 +52,15 @@ public class GameLoopManager : MonoBehaviour
 
     private Pawn activePawn = null;
 
+    private List<Enemy> enemyList = null;
+
     // Start is called before the first frame update
     void Start()
     {
         Debug.Log("Start!");
+
+        // just to allow us to keep battle room visible in editor
+        EndEncouter();
 
         GameObject obj = new GameObject("Deck");
         deck = obj.AddComponent<Deck>();
@@ -99,6 +108,7 @@ public class GameLoopManager : MonoBehaviour
         {
             // todo: roll the dice, and determine how many enemies
             int enemyCount = 2;
+            enemyList = new List<Enemy>();
             for (int i = 0; i < enemyCount; i++)
             {
                 SpawnEnemyPawn (i);
@@ -347,6 +357,9 @@ public class GameLoopManager : MonoBehaviour
 
         obj.transform.parent = HeroSpawns.transform;
 
+        // todo: add enemy details
+        enemyList.Add(new Enemy());
+
         SpawnSmokeBomb (position);
     }
 
@@ -403,10 +416,42 @@ public class GameLoopManager : MonoBehaviour
         Debug.Log(">>>>>>>>>>>>STARTING ENCOUNTER<<<<<<<<<<<<");
         gameState = GameLoopManager.GAME_STATE_BATTLE;
 
-        SetSubtitles("And now... you fight.");
+        Debug.Log("pawn: " + activePawn.ToString());
 
-        mainCamera.enabled = (false);
+        mainCamera.enabled = false;
         battleRoom.SetActive(true);
+
+        for (int i = 0; i < enemyList.Count; i++)
+        {
+            SpawnArenaEnemy(i, enemyList[i]);
+        }
+
+        SetSubtitles("And now... you fight.");
+    }
+
+    void SpawnArenaEnemy(int index, Enemy enemy)
+    {
+        Debug.Log("Spawning enemy into Arena.");
+        GameObject enemySpawns = GameObject.Find("ArenaEnemySpawn");
+        Debug.Log("enemySpawns " + enemySpawns);
+
+        Transform child = enemySpawns.transform.GetChild(index);
+
+        Vector3 position = child.position;
+        position.y += 0.5f;
+
+        GameObject obj =
+            Instantiate(arenaEnemyPrefab,
+            position,
+            Quaternion.Euler(new Vector3(0, 0, 0)));
+
+        obj.GetComponent<DogControl>().target = player.transform;
+    }
+
+    void EndEncouter()
+    {
+        mainCamera.enabled = true;
+        battleRoom.SetActive(false);
     }
 
     void SetSubtitles(string message)
