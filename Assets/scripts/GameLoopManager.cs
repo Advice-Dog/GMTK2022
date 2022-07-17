@@ -472,6 +472,7 @@ public class GameLoopManager : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
 
+        mainCameraObj.SetActive(false);
         //mainCamera.enabled = false;
         //audioListener.enabled = false;
         battleRoom.SetActive(true);
