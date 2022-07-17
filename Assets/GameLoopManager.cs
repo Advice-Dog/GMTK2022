@@ -20,6 +20,8 @@ public class GameLoopManager : MonoBehaviour
 
     public GameObject battleRoom;
 
+    AudioSource backgroundMusic;
+
     public TMPro.TextMeshProUGUI subtitles;
 
     private int roomIndex = 0;
@@ -63,6 +65,9 @@ public class GameLoopManager : MonoBehaviour
 
         // just to allow us to keep battle room visible in editor
         EndEncouter();
+
+        backgroundMusic = GetComponent<AudioSource>();
+        backgroundMusic.Play();
 
         GameObject obj = new GameObject("Deck");
         deck = obj.AddComponent<Deck>();
