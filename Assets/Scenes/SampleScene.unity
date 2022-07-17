@@ -996,6 +996,8 @@ MonoBehaviour:
   prefab: {fileID: 8771470084156421355, guid: 1161fdc2bfb90174d98fac45d1b971fb, type: 3}
   pawnPrefab: {fileID: 2809110257879626073, guid: b8d22d1e6b53d5c43ac404df9b034ffb, type: 3}
   smokePrefab: {fileID: 1273915125232972, guid: 73767e07adddc394d82b994801f89bbb, type: 3}
+  mainCamera: {fileID: 963194227}
+  battleRoom: {fileID: 1161634527}
   subtitles: {fileID: 550758113}
 --- !u!65 &595661676
 BoxCollider:
@@ -1579,7 +1581,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!81 &963194226
 AudioListener:
   m_ObjectHideFlags: 0
@@ -1817,7 +1819,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5108414517332481678, guid: 2733a796d7d4d67419b947336686e897, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5108414517800246423, guid: 2733a796d7d4d67419b947336686e897, type: 3}
       propertyPath: m_IsActive

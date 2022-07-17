@@ -12,6 +12,10 @@ public class GameLoopManager : MonoBehaviour
 
     public GameObject smokePrefab;
 
+    public Camera mainCamera;
+
+    public GameObject battleRoom;
+
     public TMPro.TextMeshProUGUI subtitles;
 
     private int roomIndex = 0;
@@ -401,6 +405,9 @@ public class GameLoopManager : MonoBehaviour
         gameState = GameLoopManager.GAME_STATE_SLIDING_OUT;
 
         SetSubtitles("And now... you fight.");
+
+        mainCamera.enabled = (false);
+        battleRoom.SetActive(true);
     }
 
     void SetSubtitles(string message)
