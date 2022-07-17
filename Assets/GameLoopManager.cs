@@ -122,7 +122,7 @@ public class GameLoopManager : MonoBehaviour
             enemyList = new List<Enemy>();
             for (int i = 0; i < enemyCount; i++)
             {
-                SpawnEnemyPawn (i);
+                SpawnEnemyPawn(i);
             }
             gameState = GameLoopManager.GAME_STATE_WAITING;
             SetSubtitles("Oh, the Dice has decided you shall fight " +
@@ -487,7 +487,7 @@ public class GameLoopManager : MonoBehaviour
         }
     }
 
-    void EndEncouter()
+    public void EndEncouter()
     {
         mainCamera.enabled = true;
         battleRoom.SetActive(false);

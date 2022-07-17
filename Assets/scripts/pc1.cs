@@ -15,6 +15,8 @@ public class pc1 : MonoBehaviour
 
     public int currentHealth;
 
+    public TMPro.TextMeshProUGUI healthBar;
+
     public int attackDamage;
 
     public float walkingSpeed;
@@ -33,11 +35,21 @@ public class pc1 : MonoBehaviour
 
     public float lookXLimit = 45.0f;
 
+    public Transform weapon;
+
+    [SerializeField] private Vector3 wepRot;
+
     public float fireDelta;
 
     private float nextFire;
 
     private float myTime;
+
+    public float damageDelta;
+
+    private float nextDamage;
+
+    private float myTimeDamage;
 
     CharacterController characterController;
 
@@ -45,7 +57,10 @@ public class pc1 : MonoBehaviour
 
     float rotationX = 0;
 
-    [HideInInspector]
+    public GameLoopManager m_someOtherScriptOnAnotherGameObject;
+
+
+        [HideInInspector]
     public bool canMove = true;
 
     public pc1()
@@ -75,6 +90,14 @@ public class pc1 : MonoBehaviour
 
     void Update()
     {
+        if (currentHealth <= 0) //if low health you die!
+        {
+            //GameLoopManager.EndEncouter();
+            healthBar.text = "";
+            m_someOtherScriptOnAnotherGameObject.EndEncouter();
+            
+        }
+
         // We are grounded, so recalculate move direction based on axes
         Vector3 forward = transform.TransformDirection(Vector3.forward);
         Vector3 right = transform.TransformDirection(Vector3.right);
@@ -131,13 +154,13 @@ public class pc1 : MonoBehaviour
         }
 
         myTime = myTime + Time.deltaTime;
+        myTimeDamage = myTimeDamage + Time.deltaTime;
 
         if (Input.GetMouseButtonDown(0) && myTime > nextFire)
         {
             nextFire = myTime + fireDelta;
             Debug.Log("you attacked");
-
-            // might want to set this to "fireDelta"
+            weapon.Rotate(wepRot * Time.deltaTime);
             nextFire = nextFire - myTime;
             myTime = 0.0F;
         }
@@ -156,5 +179,20 @@ public class pc1 : MonoBehaviour
         walkingSpeed *= (pawn.movementSpeed / 100f);
         runningSpeed *= (pawn.movementSpeed / 100f);
         canJump = pawn.canJump;
+
+        healthBar.text = "Health:" + currentHealth;
+    }
+
+    void OnParticleCollision(GameObject other)
+    {
+        if (other.gameObject.tag == "EnemyAttack" && myTimeDamage > nextDamage)
+        {
+            currentHealth = currentHealth - 1;
+            nextDamage = myTimeDamage + damageDelta;
+            Debug.Log("you were hit");
+            nextDamage = nextDamage - myTimeDamage;
+            myTimeDamage = 0.0F;
+            healthBar.text = "Health:" + currentHealth;
+        }
     }
 }

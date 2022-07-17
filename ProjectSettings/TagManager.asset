@@ -8,6 +8,7 @@ TagManager:
   - SpawnPoint
   - attackRange
   - ArenaLight
+  - EnemyAttack
   layers:
   - Default
   - TransparentFX
