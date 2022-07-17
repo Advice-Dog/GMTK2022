@@ -101,7 +101,7 @@ public class GameLoopManager : MonoBehaviour
             SetSubtitles("Oh, the Dice has decided you shall fight " +
             enemyCount.ToString() +
             " enemies. Lucky you.");
-            Invoke("StartTurn", 1);
+            Invoke("StartTurn", 2);
         }
         else if (gameState == GameLoopManager.GAME_STATE_SUMMON_PAWN)
         {
@@ -409,7 +409,7 @@ public class GameLoopManager : MonoBehaviour
         message = "Death: " + message;
         Debug.Log("Subtitles: " + message);
         subtitles.text = message;
-        Invoke("ClearSubtitles", 2);
+        Invoke("ClearSubtitles", Math.Max(1, message.Length / 20));
     }
 
     void ClearSubtitles()
