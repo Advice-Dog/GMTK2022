@@ -205,6 +205,11 @@ public class pc1 : MonoBehaviour
             Attack.pitch = Random.Range(0.05f, 0.06f);
             Attack.Play();
         }
+
+        if (Input.GetKey("r"))
+        {
+            transform.position = new Vector3(-4.67999983f, -0.430000484f, 0.660001576f);
+        }
     }
 
     // Copy over the pawn stats to our player
