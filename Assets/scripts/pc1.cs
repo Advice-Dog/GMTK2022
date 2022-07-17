@@ -179,12 +179,15 @@ public class pc1 : MonoBehaviour
 
         if (myTime <= fireDelta && myTime >= fireWait)
         {
+            m_someOtherScriptOnAnotherGameObject
+                .ShowWeaponHint("Press 'F' to attack");
             weaponParticle.SetActive(false);
             Attack.volume = 0.6f;
             Attack.pitch = Random.Range(0.6f, 0.7f);
         }
         else if (Input.GetKey("f") && myTime >= fireDelta)
         {
+            m_someOtherScriptOnAnotherGameObject.ShowWeaponHint("");
             Attack.volume = Random.Range(0.5f, 0.6f);
             Attack.pitch = Random.Range(0.8f, 0.9f);
             Attack.Play();
@@ -193,6 +196,7 @@ public class pc1 : MonoBehaviour
         }
         else if (Input.GetKey("f"))
         {
+            m_someOtherScriptOnAnotherGameObject.ShowWeaponHint("");
             Attack.volume = Random.Range(0.5f, 0.6f);
             Attack.pitch = Random.Range(0.05f, 0.06f);
             Attack.Play();
@@ -220,7 +224,8 @@ public class pc1 : MonoBehaviour
     {
         if (other.gameObject.tag == "EnemyAttack" && myTimeDamage > damageDelta)
         {
-            currentHealth = currentHealth - other.transform.root.GetComponent<DogControl>().attackDamage;
+            currentHealth =
+                currentHealth - other.GetComponent<DogControl>().attackDamage;
             Debug.Log("you were hit");
             myTimeDamage = 0.0F;
             healthBar.text = "Health: " + currentHealth;
