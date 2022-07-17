@@ -64,6 +64,8 @@ public class pc1 : MonoBehaviour
 
     public GameObject weaponParticle;
 
+    
+
     public AudioSource Attack;
 
     [HideInInspector]
@@ -97,6 +99,8 @@ public class pc1 : MonoBehaviour
 
         deathAnimator = death.GetComponent<Animator>();
         deathAnimator.SetBool("isArena", true);
+
+        transform.position = new Vector3(-4.67999983f, -0.430000484f, 0.660001576f);
     }
 
     void OnDisable()

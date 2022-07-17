@@ -35,7 +35,11 @@ public class GameLoopManager : MonoBehaviour
 
     AudioSource rollSound;
 
-    AudioSource deathVoice;
+    public AudioSource deathVoice;
+
+    public GameObject Music1;
+
+    public GameObject Music2;
 
     public TMPro.TextMeshProUGUI subtitles;
 
@@ -88,7 +92,7 @@ public class GameLoopManager : MonoBehaviour
         AudioSource[] audioSources = GetComponents<AudioSource>();
         backgroundMusic = audioSources[0];
         rollSound = audioSources[1];
-        deathVoice = audioSources[2];
+        //deathVoice = audioSources[2];
 
         backgroundMusic.Play();
 
@@ -483,6 +487,9 @@ public class GameLoopManager : MonoBehaviour
 
         Debug.Log("pawn: " + activePawn.ToString());
 
+        Music1.SetActive(false);
+        Music2.SetActive(true);
+
         // Lock cursor
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
@@ -582,6 +589,10 @@ public class GameLoopManager : MonoBehaviour
             Destroy(enemies[i]);
         }
 
+        Music1.SetActive(true);
+        Music2.SetActive(false);
+
+
         // unLock cursor
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
@@ -618,6 +629,7 @@ public class GameLoopManager : MonoBehaviour
 
     void SetSubtitles(string message)
     {
+        deathVoice.pitch = UnityEngine.Random.Range(0.40f, 0.44f);
         deathVoice.Play();
 
         // prefix with name
