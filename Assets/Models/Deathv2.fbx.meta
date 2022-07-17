@@ -1,0 +1,217 @@
+fileFormatVersion: 2
+guid: 57c637f185863da4b94388652866009b
+ModelImporter:
+  serializedVersion: 21300
+  internalIDToNameTable:
+  - first:
+      74: 489709442252458105
+    second: Flip Hand
+  - first:
+      74: -4849928613578604281
+    second: IdleTiltHead
+  - first:
+      74: -3100369314251171874
+    second: Idle
+  - first:
+      74: -2909463690258474370
+    second: Throw away
+  - first:
+      74: 9192953867585964110
+    second: ArenaDeath
+  externalObjects: {}
+  materials:
+    materialImportMode: 2
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    removeConstantScaleCurves: 1
+    motionNodeName: 
+    rigImportErrors: "Invalid Avatar Rig Configuration. Missing or invalid transform:\n\tRequired
+      human bone 'LeftUpperArm' not found\n"
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 3
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 0
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    nodeNameCollisionStrategy: 1
+    fileIdsGeneration: 2
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    keepQuads: 0
+    weldVertices: 1
+    bakeAxisConversion: 0
+    preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    optimizeBones: 1
+    meshOptimizationFlags: -1
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVMarginMethod: 1
+    secondaryUVMinLightmapResolution: 40
+    secondaryUVMinObjectScale: 1
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  referencedClips: []
+  importAnimation: 1
+  humanDescription:
+    serializedVersion: 3
+    human: []
+    skeleton:
+    - name: Deathv2(Clone)
+      parentName: 
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: unamed
+      parentName: Deathv2(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Armature
+      parentName: Deathv2(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Dust3D:Body
+      parentName: Armature
+      position: {x: 0, y: 0.7514777, z: 0}
+      rotation: {x: -0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Dust3D:Spine1
+      parentName: Dust3D:Body
+      position: {x: -0.0040100217, y: -0.094918996, z: 0}
+      rotation: {x: -0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Dust3D:Neck_Joint1
+      parentName: Dust3D:Spine1
+      position: {x: 0.0040100217, y: 0.17780599, z: 0}
+      rotation: {x: -0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Dust3D:Neck_Joint2
+      parentName: Dust3D:Neck_Joint1
+      position: {x: -0, y: 0.029412001, z: 0}
+      rotation: {x: -0, y: -0, z: -0, w: 1}
+      scale: {x: 0.99999994, y: 1, z: 0.99999994}
+    - name: Dust3D:Virtual_Body_LeftLimb1
+      parentName: Dust3D:Body
+      position: {x: -0.0040100217, y: -0.094918996, z: 0}
+      rotation: {x: -0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Dust3D:LeftLimb1_Joint1
+      parentName: Dust3D:Virtual_Body_LeftLimb1
+      position: {x: -0.077540964, y: 0.03208399, z: 0}
+      rotation: {x: -0, y: -0, z: 0.3463537, w: 0.938104}
+      scale: {x: 0.99999994, y: 0.9999999, z: 1}
+    - name: Dust3D:LeftLimb1_Joint2
+      parentName: Dust3D:LeftLimb1_Joint1
+      position: {x: -0.2807488, y: -0.191176, z: 0}
+      rotation: {x: 0.051898938, y: 0.009368776, z: -0.28343022, w: 0.9575417}
+      scale: {x: 1, y: 1.0000001, z: 0.99999994}
+    - name: Dust3D:LeftLimb1_Joint3
+      parentName: Dust3D:LeftLimb1_Joint2
+      position: {x: 0.033422798, y: -0.26604298, z: -0.0026739836}
+      rotation: {x: -0.07360573, y: -0.55655646, z: -0.031171571, w: 0.82695556}
+      scale: {x: 1, y: 1.0000002, z: 1.0000002}
+    - name: Dust3D:LeftLimb1_Joint4
+      parentName: Dust3D:LeftLimb1_Joint3
+      position: {x: 0.14973202, y: -0.08288801, z: 0.032087028}
+      rotation: {x: -0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1.0000004, z: 1.0000004}
+    - name: Dust3D:Virtual_Body_RightLimb1
+      parentName: Dust3D:Body
+      position: {x: -0.0040100217, y: -0.094918996, z: 0}
+      rotation: {x: -0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Dust3D:RightLimb1_Joint1
+      parentName: Dust3D:Virtual_Body_RightLimb1
+      position: {x: 0.08556101, y: 0.03208399, z: 0}
+      rotation: {x: -0, y: -0, z: -0.34635377, w: 0.938104}
+      scale: {x: 1, y: 0.99999994, z: 1}
+    - name: Dust3D:RightLimb1_Joint2
+      parentName: Dust3D:RightLimb1_Joint1
+      position: {x: 0.2807488, y: -0.191176, z: 0}
+      rotation: {x: 0.051898938, y: -0.009368763, z: 0.28343016, w: 0.9575417}
+      scale: {x: 1, y: 1.0000001, z: 1}
+    - name: Dust3D:RightLimb1_Joint3
+      parentName: Dust3D:RightLimb1_Joint2
+      position: {x: -0.033422798, y: -0.26604298, z: -0.0026739836}
+      rotation: {x: -0.073605776, y: 0.55655646, z: 0.031171706, w: 0.82695556}
+      scale: {x: 1, y: 0.99999994, z: 0.9999999}
+    - name: Dust3D:RightLimb1_Joint4
+      parentName: Dust3D:RightLimb1_Joint3
+      position: {x: -0.14973202, y: -0.08288801, z: 0.032087028}
+      rotation: {x: -0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1.0000001, z: 1}
+    - name: Dust3D:Spine01
+      parentName: Dust3D:Body
+      position: {x: -0.0040100217, y: -0.094918996, z: 0}
+      rotation: {x: -0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Dust3D:Tail_Joint1
+      parentName: Dust3D:Spine01
+      position: {x: 0.009358019, y: -0.47727403, z: 0}
+      rotation: {x: -0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    globalScale: 1
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 1
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  autoGenerateAvatarMappingIfUnspecified: 1
+  animationType: 2
+  humanoidOversampling: 1
+  avatarSetup: 1
+  addHumanoidExtraRootOnlyWhenUsingAvatar: 1
+  remapMaterialsIfMaterialImportModeIsNone: 0
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
