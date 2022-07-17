@@ -401,9 +401,6 @@ public class GameLoopManager : MonoBehaviour
     void StartEncounter()
     {
         Debug.Log(">>>>>>>>>>>>STARTING ENCOUNTER<<<<<<<<<<<<");
-
-        // todo: start the
-        // todo: remove, just for testing, allow the user to end their turn on their own.
         gameState = GameLoopManager.GAME_STATE_BATTLE;
 
         SetSubtitles("And now... you fight.");
