@@ -32,18 +32,15 @@ public class Deck : MonoBehaviour
         heros.Add(new HeroM2());
 
         // Spell Cards
-        for (int i = 0; i < 2; i++)
-        {
-            spells.Add(new Juice());
-            spells.Add(new GigaJuice());
-            spells.Add(new Beef());
-            spells.Add(new GigaBeef());
-            spells.Add(new Dejuice());
-            spells.Add(new GigaDejuice());
-            spells.Add(new Swiggy());
-            spells.Add(new Bazinga());
-            spells.Add(new Zoom());
-        }
+        spells.Add(new Juice());
+        spells.Add(new GigaJuice());
+        spells.Add(new Beef());
+        spells.Add(new GigaBeef());
+        spells.Add(new Dejuice());
+        spells.Add(new GigaDejuice());
+        spells.Add(new Swiggy());
+        spells.Add(new Bazinga());
+        spells.Add(new Zoom());
         spells.Add(new Kachow());
         spells.Add(new Marcupial());
         spells.Add(new BurnBabyBurn());
