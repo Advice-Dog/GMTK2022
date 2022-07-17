@@ -92,7 +92,7 @@ public class pc1 : MonoBehaviour
         Cursor.visible = false;
 
         deathAnimator = death.GetComponent<Animator>();
-        deathAnimator.SetBool("ArenaDeath", true);
+        deathAnimator.SetBool("isArena", true);
     }
 
     void Update()
@@ -106,7 +106,7 @@ public class pc1 : MonoBehaviour
             // unLock cursor
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
-            deathAnimator.SetBool("DeathArena", false);
+            deathAnimator.SetBool("isArena", false);
             deathAnimator.SetBool("isThrow", true);
             m_someOtherScriptOnAnotherGameObject.EndEncouter(false);
         }
