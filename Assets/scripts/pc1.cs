@@ -61,7 +61,7 @@ public class pc1 : MonoBehaviour
     public GameLoopManager m_someOtherScriptOnAnotherGameObject;
 
     public Animator deathAnimator;
-    
+
     public GameObject death;
 
     [HideInInspector]
@@ -87,10 +87,6 @@ public class pc1 : MonoBehaviour
     {
         characterController = GetComponent<CharacterController>();
 
-        // Lock cursor
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
-
         deathAnimator = death.GetComponent<Animator>();
         deathAnimator.SetBool("isArena", true);
     }
@@ -103,9 +99,7 @@ public class pc1 : MonoBehaviour
         {
             //GameLoopManager.EndEncouter();
             healthBar.text = "";
-            // unLock cursor
-            Cursor.lockState = CursorLockMode.None;
-            Cursor.visible = true;
+
             deathAnimator.SetBool("isArena", false);
             deathAnimator.SetBool("isThrow", true);
             m_someOtherScriptOnAnotherGameObject.EndEncouter(false);

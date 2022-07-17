@@ -75,8 +75,7 @@ public class GameLoopManager : MonoBehaviour
         Debug.Log("Start!");
 
         // just to allow us to keep battle room visible in editor
-        EndEncouter(true);
-
+        //EndEncouter(true);
         deathAnimator = death.GetComponent<Animator>();
 
         //audioListener = mainCameraObj.GetComponant<AudioListener>();
@@ -458,7 +457,10 @@ public class GameLoopManager : MonoBehaviour
 
         Debug.Log("pawn: " + activePawn.ToString());
 
-        mainCameraObj.SetActive(false);
+        // Lock cursor
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+
 
         //mainCamera.enabled = false;
         //audioListener.enabled = false;
@@ -524,6 +526,7 @@ public class GameLoopManager : MonoBehaviour
     {
         GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
         bool isComplete = true;
+
         for (int i = 0; i < enemies.Length; i++)
         {
             if (enemies[i].GetComponent<DogControl>().currentHealth > 0)
@@ -532,7 +535,6 @@ public class GameLoopManager : MonoBehaviour
                 break;
             }
         }
-
         if (isComplete)
         {
             EndEncouter(true);
@@ -541,17 +543,29 @@ public class GameLoopManager : MonoBehaviour
 
     public void EndEncouter(bool isAlive)
     {
+        // unLock cursor
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
         if (isAlive)
         {
             //mainCamera.enabled = true;
             mainCameraObj.SetActive(true);
             battleRoom.SetActive(false);
             deathAnimator.SetBool("isTilt", true);
+
+            gameState = GameLoopManager.GAME_STATE_WAITING;
+
+            Invoke("PostEndEncounter", 2);
         }
         else
         {
             ShowGameOver();
         }
+    }
+
+    void PostEndEncounter()
+    {
+        gameState = GameLoopManager.GAME_STATE_SLIDING_OUT;
     }
 
     void ShowGameOver()
