@@ -43,7 +43,9 @@ public class DogControl : MonoBehaviour
         agent.SetDestination(target.position);
         if (cast)
         {
-            Debug.Log("attack");
+            Attack.volume = Random.Range(0.3f, 0.5f);
+            Attack.pitch = Random.Range(0.6f, 0.8f);
+            //Debug.Log("attack");
             enemy_Animator.SetBool("isWalk", false);
             enemy_Animator.SetBool("isCast", true);
             Attack.Play();
