@@ -1,0 +1,10 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI%20Toolkit/styles/button-styles.uss?fileID=7433441132597879392&amp;guid=d1299ac0117df3b4893f4f6a243098a8&amp;type=3#button-styles" />
+    <ui:VisualElement name="background" style="flex-grow: 1; align-items: center; justify-content: center; color: rgb(0, 0, 0); background-color: rgb(0, 0, 0); border-left-width: 2px; border-right-width: 2px; border-top-width: 2px; border-bottom-width: 2px; border-left-color: rgba(0, 0, 0, 0); border-right-color: rgba(0, 0, 0, 0); border-top-color: rgba(0, 0, 0, 0); border-bottom-color: rgba(0, 0, 0, 0);">
+        <ui:Label text="Death Reroll" display-tooltip-when-elided="true" name="lblTitle" enable-rich-text="true" style="background-color: rgba(56, 56, 56, 0); color: rgba(255, 255, 255, 255); font-size: 84px; -unity-font: url(&apos;project://database/Assets/TextMesh%20Pro/Fonts/Kaph-Regular.ttf?fileID=12800000&amp;guid=4f66cbba70b2dcc47856911e2e2564f5&amp;type=3#Kaph-Regular&apos;); -unity-font-style: normal;" />
+        <ui:VisualElement style="height: 252px; width: 231px; align-items: center; justify-content: center;">
+            <ui:Button text="Quit" display-tooltip-when-elided="true" name="btnQuit" class="button-style" style="bottom: -140px; left: auto;" />
+            <ui:Button text="Wake Up" display-tooltip-when-elided="true" name="btnPlay" class="button-style" style="bottom: 0; left: auto;" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>
