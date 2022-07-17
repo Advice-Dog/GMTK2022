@@ -33,6 +33,8 @@ public class GameLoopManager : MonoBehaviour
 
     AudioSource backgroundMusic;
 
+    AudioSource rollSound;
+
     public TMPro.TextMeshProUGUI subtitles;
 
     private int roomIndex = 0;
@@ -81,8 +83,10 @@ public class GameLoopManager : MonoBehaviour
         deathAnimator = death.GetComponent<Animator>();
 
         //audioListener = mainCameraObj.GetComponant<AudioListener>();
-        backgroundMusic = GetComponent<AudioSource>();
+        backgroundMusic = GetComponents<AudioSource>()[0];
         backgroundMusic.Play();
+
+        rollSound = GetComponents<AudioSource>()[1];
 
         GameObject obj = new GameObject("Deck");
         deck = obj.AddComponent<Deck>();
@@ -139,6 +143,7 @@ public class GameLoopManager : MonoBehaviour
         {
             gameState = GameLoopManager.GAME_STATE_SLIDING_IN;
             SpawnRoom();
+            rollSound.Play();
         }
         else if (gameState == GameLoopManager.GAME_STATE_SLIDING_IN)
         {
