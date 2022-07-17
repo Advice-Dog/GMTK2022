@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GameLoopManager : MonoBehaviour
@@ -9,6 +10,8 @@ public class GameLoopManager : MonoBehaviour
     public GameObject prefab;
 
     public GameObject pawnPrefab;
+
+    public GameObject enemyPrefab;
 
     public GameObject smokePrefab;
 
@@ -20,7 +23,7 @@ public class GameLoopManager : MonoBehaviour
 
     public GameObject mainCameraObj;
 
-    public AudioListener audioListener; 
+    public AudioListener audioListener;
 
     public GameObject battleRoom;
 
@@ -72,7 +75,7 @@ public class GameLoopManager : MonoBehaviour
         Debug.Log("Start!");
 
         // just to allow us to keep battle room visible in editor
-        EndEncouter();
+        EndEncouter(true);
 
         deathAnimator = death.GetComponent<Animator>();
 
@@ -137,7 +140,7 @@ public class GameLoopManager : MonoBehaviour
             enemyList = new List<Enemy>();
             for (int i = 0; i < enemyCount; i++)
             {
-                SpawnEnemyPawn(i);
+                SpawnEnemyPawn (i);
             }
             if (enemyCount == 1)
             {
@@ -384,7 +387,7 @@ public class GameLoopManager : MonoBehaviour
         position.y += 0.1f;
 
         GameObject obj =
-            Instantiate(pawnPrefab,
+            Instantiate(enemyPrefab,
             position,
             Quaternion.Euler(new Vector3(0, 0, 0)));
 
@@ -452,6 +455,7 @@ public class GameLoopManager : MonoBehaviour
         Debug.Log("pawn: " + activePawn.ToString());
 
         mainCameraObj.SetActive(false);
+
         //mainCamera.enabled = false;
         //audioListener.enabled = false;
         battleRoom.SetActive(true);
@@ -512,12 +516,25 @@ public class GameLoopManager : MonoBehaviour
         }
     }
 
-    public void EndEncouter()
+    public void EndEncouter(bool isAlive)
     {
-        //mainCamera.enabled = true;
-        mainCameraObj.SetActive(true);
-        battleRoom.SetActive(false);
-        deathAnimator.SetBool("isTilt", true);
+        if (isAlive)
+        {
+            //mainCamera.enabled = true;
+            mainCameraObj.SetActive(true);
+            battleRoom.SetActive(false);
+            deathAnimator.SetBool("isTilt", true);
+        }
+        else
+        {
+            ShowGameOver();
+        }
+    }
+
+    void ShowGameOver()
+    {
+        SceneManager.LoadScene("game_over");
+        SceneManager.UnloadSceneAsync("SampleScene");
     }
 
     void SetSubtitles(string message)

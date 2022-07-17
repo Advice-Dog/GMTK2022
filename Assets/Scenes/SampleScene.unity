@@ -310,7 +310,7 @@ GameObject:
   - component: {fileID: 114878758}
   m_Layer: 0
   m_Name: Spot Light
-  m_TagString: Untagged
+  m_TagString: ArenaLight
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1282,6 +1282,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefab: {fileID: 8771470084156421355, guid: 1161fdc2bfb90174d98fac45d1b971fb, type: 3}
   pawnPrefab: {fileID: 2809110257879626073, guid: b8d22d1e6b53d5c43ac404df9b034ffb, type: 3}
+  enemyPrefab: {fileID: 2809110257879626073, guid: e3b75f7cf17d13c44870821199c00dbd, type: 3}
   smokePrefab: {fileID: 1273915125232972, guid: 73767e07adddc394d82b994801f89bbb, type: 3}
   arenaEnemyPrefab: {fileID: 3843487980750676020, guid: 3166000eef2a787448831aee020d34bd, type: 3}
   player: {fileID: 1965257160}

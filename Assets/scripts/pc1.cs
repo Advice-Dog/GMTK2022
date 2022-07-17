@@ -37,7 +37,8 @@ public class pc1 : MonoBehaviour
 
     public Transform weapon;
 
-    [SerializeField] private Vector3 wepRot;
+    [SerializeField]
+    private Vector3 wepRot;
 
     public float fireDelta;
 
@@ -62,7 +63,6 @@ public class pc1 : MonoBehaviour
     public Animator deathAnimator;
     
     public GameObject death;
-
 
     [HideInInspector]
     public bool canMove = true;
@@ -97,7 +97,9 @@ public class pc1 : MonoBehaviour
 
     void Update()
     {
-        if (currentHealth <= 0) //if low health you die!
+        if (
+            currentHealth <= 0 //if low health you die!
+        )
         {
             //GameLoopManager.EndEncouter();
             healthBar.text = "";
@@ -106,7 +108,7 @@ public class pc1 : MonoBehaviour
             Cursor.visible = true;
             deathAnimator.SetBool("DeathArena", false);
             deathAnimator.SetBool("isThrow", true);
-            m_someOtherScriptOnAnotherGameObject.EndEncouter();
+            m_someOtherScriptOnAnotherGameObject.EndEncouter(false);
         }
 
         // We are grounded, so recalculate move direction based on axes
