@@ -79,7 +79,7 @@ public class pc1 : MonoBehaviour
         walkingSpeed = DEFAULT_WALKING_SPEED;
         runningSpeed = DEFAULT_RUNNING_SPEED;
         jumpSpeed = DEFAULT_JUMP_SPEED;
-        fireDelta = DEFAULT_ATTACK_DELAY/10;
+        fireDelta = DEFAULT_ATTACK_DELAY / 10;
         myTime = 0.0f;
         canJump = true;
     }
@@ -90,10 +90,18 @@ public class pc1 : MonoBehaviour
 
         weaponParticle.SetActive(false);
 
-        if (fireDelta < 1) { fireDelta = 1.25f; }
+        if (fireDelta < 1)
+        {
+            fireDelta = 1.25f;
+        }
 
         deathAnimator = death.GetComponent<Animator>();
         deathAnimator.SetBool("isArena", true);
+    }
+
+    void OnDisable()
+    {
+        healthBar.text = "";
     }
 
     void Update()
