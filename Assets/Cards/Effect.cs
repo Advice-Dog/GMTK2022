@@ -20,7 +20,7 @@ public class StrengthEffect: Effect {
         if(amount < 0) {
             prefix = "decreases";
         }
-        return prefix + " attack power by " + Mathf.Abs(amount).ToString();
+        return prefix + " attack power by " + Mathf.Abs(amount).ToString() + "%";
     }
 }
 

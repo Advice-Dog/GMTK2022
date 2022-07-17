@@ -20,11 +20,13 @@ public class GameLoopManager : MonoBehaviour
 
     public GameObject battleRoom;
 
+    AudioSource backgroundMusic;
+
     public TMPro.TextMeshProUGUI subtitles;
 
     private int roomIndex = 0;
 
-    private static int MAX_ROOM_COUNT = 5;
+    private static int MAX_ROOM_COUNT = 3;
 
     private Deck deck;
 
@@ -63,6 +65,9 @@ public class GameLoopManager : MonoBehaviour
 
         // just to allow us to keep battle room visible in editor
         EndEncouter();
+
+        backgroundMusic = GetComponent<AudioSource>();
+        backgroundMusic.Play();
 
         GameObject obj = new GameObject("Deck");
         deck = obj.AddComponent<Deck>();
@@ -117,17 +122,24 @@ public class GameLoopManager : MonoBehaviour
         }
         else if (gameState == GAME_STATE_SPAWN_ENEMIES)
         {
-            // todo: roll the dice, and determine how many enemies
-            int enemyCount = 2;
+            int enemyCount = UnityEngine.Random.Range(1, 1 + roomIndex);
             enemyList = new List<Enemy>();
             for (int i = 0; i < enemyCount; i++)
             {
                 SpawnEnemyPawn(i);
             }
+            if (enemyCount == 1)
+            {
+                SetSubtitles("Lucky you, the Dice has decided you'll only fight one enemy.");
+            }
+            else
+            {
+                SetSubtitles("Oh, the Dice has decided you shall fight " +
+                enemyCount.ToString() +
+                " enemies. How unlucky.");
+            }
             gameState = GameLoopManager.GAME_STATE_WAITING;
-            SetSubtitles("Oh, the Dice has decided you shall fight " +
-            enemyCount.ToString() +
-            " enemies. Lucky you.");
+
             Invoke("StartTurn", 2);
         }
         else if (gameState == GameLoopManager.GAME_STATE_SUMMON_PAWN)
