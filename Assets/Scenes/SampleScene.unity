@@ -1278,7 +1278,11 @@ MonoBehaviour:
   arenaEnemyPrefab: {fileID: 3843487980750676020, guid: 3166000eef2a787448831aee020d34bd, type: 3}
   player: {fileID: 1965257160}
   mainCamera: {fileID: 963194227}
+  mainCameraObj: {fileID: 963194225}
+  audioListener: {fileID: 963194226}
   battleRoom: {fileID: 1965257160}
+  deathAnimator: {fileID: 2098597138}
+  death: {fileID: 910241889}
   subtitles: {fileID: 550758113}
 --- !u!65 &595661676
 BoxCollider:
@@ -2166,6 +2170,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 341d5442aa910434cac4403b043501c4, type: 3}
+--- !u!1 &910241889 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7806788489787562922, guid: a043c07b1408f0d4195831a0ade130cf, type: 3}
+  m_PrefabInstance: {fileID: 429588357453952594}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &910241891 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 3601952525523671914, guid: a043c07b1408f0d4195831a0ade130cf, type: 3}
+  m_PrefabInstance: {fileID: 429588357453952594}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &923233090 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 341d5442aa910434cac4403b043501c4, type: 3}
@@ -2791,6 +2805,10 @@ PrefabInstance:
       propertyPath: damageDelta
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 5108414517332481678, guid: 2733a796d7d4d67419b947336686e897, type: 3}
+      propertyPath: deathAnimator
+      value: 
+      objectReference: {fileID: 910241891}
     - target: {fileID: 5108414517332481678, guid: 2733a796d7d4d67419b947336686e897, type: 3}
       propertyPath: m_someOtherScriptOnAnotherGameObject
       value: 
@@ -4588,6 +4606,11 @@ PrefabInstance:
 --- !u!4 &2098597137 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7429981059457286416, guid: a043c07b1408f0d4195831a0ade130cf, type: 3}
+  m_PrefabInstance: {fileID: 2098597136}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &2098597138 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 3601952525523671914, guid: a043c07b1408f0d4195831a0ade130cf, type: 3}
   m_PrefabInstance: {fileID: 2098597136}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2131545912

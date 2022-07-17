@@ -59,8 +59,12 @@ public class pc1 : MonoBehaviour
 
     public GameLoopManager m_someOtherScriptOnAnotherGameObject;
 
+    public Animator deathAnimator;
+    
+    public GameObject death;
 
-        [HideInInspector]
+
+    [HideInInspector]
     public bool canMove = true;
 
     public pc1()
@@ -86,6 +90,9 @@ public class pc1 : MonoBehaviour
         // Lock cursor
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+
+        deathAnimator = death.GetComponent<Animator>();
+        deathAnimator.SetBool("ArenaDeath", true);
     }
 
     void Update()
@@ -94,11 +101,12 @@ public class pc1 : MonoBehaviour
         {
             //GameLoopManager.EndEncouter();
             healthBar.text = "";
-            m_someOtherScriptOnAnotherGameObject.EndEncouter();
             // unLock cursor
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
-
+            deathAnimator.SetBool("DeathArena", false);
+            deathAnimator.SetBool("isThrow", true);
+            m_someOtherScriptOnAnotherGameObject.EndEncouter();
         }
 
         // We are grounded, so recalculate move direction based on axes
