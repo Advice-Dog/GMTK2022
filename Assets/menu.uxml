@@ -1,0 +1,10 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <ui:VisualElement style="height: 100%; width: 100%; color: rgb(255, 255, 255);">
+        <ui:Label display-tooltip-when-elided="true" style="font-size: 128px; -unity-text-align: middle-center; -unity-font: url(&apos;project://database/Assets/TextMesh%20Pro/Fonts/Kaph-Regular.ttf?fileID=12800000&amp;guid=4f66cbba70b2dcc47856911e2e2564f5&amp;type=3#Kaph-Regular&apos;); height: 60%; background-image: url(&apos;project://database/Assets/title_background.png?fileID=2800000&amp;guid=324b44fa3c8cac94389ad5c0b1106119&amp;type=3#title_background&apos;);" />
+        <ui:GroupBox style="height: 20%; width: auto; align-items: center; justify-content: space-between;">
+            <ui:Button text="WAKE UP" display-tooltip-when-elided="true" name="play" style="font-size: 48px; margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0; height: auto; background-image: url(&apos;project://database/Assets/button_background.png?fileID=2800000&amp;guid=21990bef5bb33104eac1dcbfd984175f&amp;type=3#button_background&apos;); background-color: rgba(255, 0, 0, 0); width: 60%;" />
+            <ui:Label text="&#10;&#10;" display-tooltip-when-elided="true" />
+            <ui:Button text="QUIT" display-tooltip-when-elided="true" name="quit" style="font-size: 48px; margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0; height: auto; background-color: rgba(255, 0, 0, 0); background-image: url(&apos;project://database/Assets/button_background.png?fileID=2800000&amp;guid=21990bef5bb33104eac1dcbfd984175f&amp;type=3#button_background&apos;); width: 60%;" />
+        </ui:GroupBox>
+    </ui:VisualElement>
+</ui:UXML>
