@@ -25,8 +25,8 @@ public class UIController : MonoBehaviour
     //loads in game scene and starts game
     void btnPlayPressed()
     {
-        SceneManager.LoadScene("SampleScene");
-        SceneManager.UnloadSceneAsync("MainMenu");
+        SceneManager.LoadScene("story");
+        SceneManager.UnloadSceneAsync("menu");
     }
 
     void btnQuitPressed()
