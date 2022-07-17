@@ -35,7 +35,7 @@ public class Pawn
         if (effect is StrengthEffect)
         {
             float percent = (1f - ((StrengthEffect) effect).amount);
-            attackDamage = (int)((float) attackDamage * percent);
+            attackDamage = 1; //(int)((float) attackDamage * percent);
         }
         else if (effect is HealthEffect)
         {
