@@ -426,6 +426,9 @@ public class GameLoopManager : MonoBehaviour
             SpawnArenaEnemy(i, enemyList[i]);
         }
 
+        // Handling Blind
+        UpdateArenaLights();
+
         SetSubtitles("And now... you fight.");
     }
 
@@ -446,6 +449,30 @@ public class GameLoopManager : MonoBehaviour
             Quaternion.Euler(new Vector3(0, 0, 0)));
 
         obj.GetComponent<DogControl>().target = player.transform;
+    }
+
+    void UpdateArenaLights()
+    {
+        GameObject[] lights = GameObject.FindGameObjectsWithTag("ArenaLight");
+        for (int i = 0; i < lights.Length; i++)
+        {
+            ParticleSystem system = lights[i].GetComponent<ParticleSystem>();
+            if (system != null)
+            {
+                if (activePawn.isBlind)
+                {
+                    system.Stop();
+                }
+                else
+                {
+                    system.Play();
+                }
+            }
+            else
+            {
+                lights[i].SetActive(!activePawn.isBlind);
+            }
+        }
     }
 
     void EndEncouter()
