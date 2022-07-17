@@ -482,6 +482,9 @@ public class GameLoopManager : MonoBehaviour
         }
 
         player.GetComponent<pc1>().SetPlayerStats(activePawn);
+        player.transform.position = new Vector3(-5.36f, 0, 0);
+        player.transform.rotation =
+            GameObject.Find("ArenaHeroSpawn").transform.rotation;
 
         // Handling Blind
         UpdateArenaLights();
@@ -554,6 +557,13 @@ public class GameLoopManager : MonoBehaviour
 
     public void EndEncouter(bool isAlive)
     {
+        // clearing up any enemies
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        for (int i = 0; i < enemies.Length; i++)
+        {
+            Destroy(enemies[i]);
+        }
+
         // unLock cursor
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
