@@ -24,9 +24,13 @@ public class GameLoopManager : MonoBehaviour
 
     private static int GAME_STATE_SPAWN_ENEMIES = -8;
 
-    private static int GAME_STATE_PLAYING = 0;
+    private static int GAME_STATE_SUMMON_PAWN = 0;
+
+    private static int GAME_STATE_PLAYS_SPELL = 1;
 
     private static int GAME_STATE_SLIDING_OUT = 9;
+
+    private static int GAME_STATE_WAITING = -666;
 
     private static float ROOM_SLIDE_SPEED = 3.0f;
 
@@ -44,13 +48,24 @@ public class GameLoopManager : MonoBehaviour
         Debug.Log("Created the players deck!");
     }
 
-    void Init()
+    void StartTurn()
     {
-        if (deck.IsHandEmpty())
-        {
-            activePawn = null;
-            SpawnHand();
-        }
+        activePawn = null;
+        deck.DrawPawns();
+        SpawnHand();
+
+        // waiting for player's action
+        gameState = GameLoopManager.GAME_STATE_WAITING;
+    }
+
+    void DrawSpells()
+    {
+        // let the user play their spells and end their turn
+        deck.DrawSpells();
+        SpawnHand();
+
+        // waiting for player's action
+        gameState = GameLoopManager.GAME_STATE_WAITING;
     }
 
     // Update is called once per frame
@@ -73,11 +88,16 @@ public class GameLoopManager : MonoBehaviour
             {
                 SpawnEnemyPawn (i);
             }
-            gameState = GAME_STATE_PLAYING;
+            gameState = GameLoopManager.GAME_STATE_WAITING;
+            Invoke("StartTurn", 1);
         }
-        else if (gameState == GameLoopManager.GAME_STATE_PLAYING)
+        else if (gameState == GameLoopManager.GAME_STATE_SUMMON_PAWN)
         {
-            Init();
+            StartTurn();
+        }
+        else if (gameState == GameLoopManager.GAME_STATE_PLAYS_SPELL)
+        {
+            DrawSpells();
         }
         else if (gameState == GameLoopManager.GAME_STATE_SLIDING_OUT)
         {
@@ -93,18 +113,26 @@ public class GameLoopManager : MonoBehaviour
 
     void SpawnHand()
     {
-        deck.SetHand();
-
         GameObject plane = GameObject.Find("Hand Plane");
         Vector3 position = plane.transform.position;
 
         float cardWidth = 0.12f;
         float cardSpacer = 0.02f;
 
-        position.x -= (cardWidth + cardSpacer) * 2f;
-
         List<Card> hand = deck.GetHand();
-        for (int i = 0; i < hand.Count; i++)
+
+        int cardCount = hand.Count;
+
+        // for centering the 2 cards
+        position.x -= (cardWidth + cardSpacer) * 0.5f;
+
+        // move cards, move it a little more to the left
+        if (cardCount == 3)
+        {
+            position.x -= (cardWidth + cardSpacer) * 0.5f;
+        }
+
+        for (int i = 0; i < cardCount; i++)
         {
             Card card = hand[i];
 
@@ -278,6 +306,10 @@ public class GameLoopManager : MonoBehaviour
         activePawn = new Pawn();
 
         SpawnSmokeBomb (position);
+
+        ClearHand();
+
+        Invoke("DrawSpells", 1);
     }
 
     void SpawnEnemyPawn(int index)
@@ -322,5 +354,14 @@ public class GameLoopManager : MonoBehaviour
         }
 
         card.ApplyEffect (activePawn);
+    }
+
+    void ClearHand()
+    {
+        GameObject[] cards = GameObject.FindGameObjectsWithTag("Card");
+        foreach (GameObject card in cards)
+        {
+            Destroy (card);
+        }
     }
 }
