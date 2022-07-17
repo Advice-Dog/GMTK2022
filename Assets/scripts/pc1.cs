@@ -225,7 +225,7 @@ public class pc1 : MonoBehaviour
         if (other.gameObject.tag == "EnemyAttack" && myTimeDamage > damageDelta)
         {
             currentHealth =
-                currentHealth - other.GetComponent<DogControl>().attackDamage;
+                currentHealth - other.transform.root.GetComponent<DogControl>().attackDamage;
             Debug.Log("you were hit");
             myTimeDamage = 0.0F;
             healthBar.text = "Health: " + currentHealth;
