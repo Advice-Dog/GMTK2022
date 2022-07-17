@@ -77,7 +77,7 @@ public class pc1 : MonoBehaviour
 
         myTime = myTime + Time.deltaTime;
 
-        if (Input.GetButton("Fire1") && myTime > nextFire)
+        if (Input.GetMouseButtonDown(0) && myTime > nextFire)
         {
             nextFire = myTime + fireDelta;
             Debug.Log("you attacked");
