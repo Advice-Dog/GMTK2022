@@ -52,6 +52,7 @@ public class GameLoopManager : MonoBehaviour
 
     void StartTurn()
     {
+        Debug.Log(">>> Starting new turn <<<");
         activePawn = null;
         deck.DrawPawns();
         SpawnHand();
