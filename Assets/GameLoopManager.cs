@@ -168,6 +168,10 @@ public class GameLoopManager : MonoBehaviour
         {
             MoveRoom("Room Despawner");
         }
+        else if (gameState == GameLoopManager.GAME_STATE_BATTLE)
+        {
+            CheckBattleState();
+        }
 
         //Check for mouse click
         if (Input.GetMouseButtonDown(0))
@@ -513,6 +517,25 @@ public class GameLoopManager : MonoBehaviour
             {
                 lights[i].SetActive(!activePawn.isBlind);
             }
+        }
+    }
+
+    void CheckBattleState()
+    {
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        bool isComplete = true;
+        for (int i = 0; i < enemies.Length; i++)
+        {
+            if (enemies[i].GetComponent<DogControl>().currentHealth > 0)
+            {
+                isComplete = false;
+                break;
+            }
+        }
+
+        if (isComplete)
+        {
+            EndEncouter(true);
         }
     }
 
