@@ -629,7 +629,7 @@ public class GameLoopManager : MonoBehaviour
 
     void SetSubtitles(string message)
     {
-        deathVoice.pitch = UnityEngine.Random.Range(0.40f, 0.44f);
+        deathVoice.pitch = UnityEngine.Random.Range(0.1f, 0.11f);
         deathVoice.Play();
 
         // prefix with name

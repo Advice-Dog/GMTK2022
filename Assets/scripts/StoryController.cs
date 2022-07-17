@@ -75,6 +75,7 @@ public class StoryController : MonoBehaviour
         int delay = Mathf.Max(3, message.Length / 10);
         Debug.Log("delay " + delay);
 
+        deathVoice.pitch = UnityEngine.Random.Range(0.09f, 0.11f);
         deathVoice.Play();
         Invoke("StopVoice", delay - 1);
 
