@@ -1,0 +1,13 @@
+.button-style1 {
+    background-color: rgba(0, 0, 0, 255);
+    height: 65px;
+    width: 190px;
+    position: absolute;
+    top: 596px;
+    left: 14px;
+    border-top-left-radius: 15px;
+    border-bottom-left-radius: 15px;
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+    font-size: 46px;
+}

@@ -9,6 +9,7 @@ public class UIController : MonoBehaviour
 
     public Button btnPlay;
     public Button btnQuit;
+  
 
     // Start is called before the first frame update
     void Start()
@@ -18,13 +19,20 @@ public class UIController : MonoBehaviour
         btnPlay = root.Q<Button>("btnPlay");
         btnQuit = root.Q<Button>("btnQuit");
 
+      
+
         btnPlay.clicked += btnPlayPressed;
         btnQuit.clicked += btnQuitPressed;
 
+
     }
 
+    
+
+    //loads in game scene and starts game
     void btnPlayPressed() {
         SceneManager.LoadScene("SampleScene");
+        SceneManager.UnloadSceneAsync("MainMenu");
 
     }
 
