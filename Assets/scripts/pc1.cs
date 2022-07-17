@@ -95,7 +95,10 @@ public class pc1 : MonoBehaviour
             //GameLoopManager.EndEncouter();
             healthBar.text = "";
             m_someOtherScriptOnAnotherGameObject.EndEncouter();
-            
+            // unLock cursor
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+
         }
 
         // We are grounded, so recalculate move direction based on axes
