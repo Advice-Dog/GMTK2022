@@ -1,46 +1,46 @@
-class HeroW1 : PawnCard
+class Tank : PawnCard
 {
-    public HeroW1() :
+    public Tank() :
         base(PawnCard.COMBAT_TYPE_WARRIOR, 3, 100, 9, 75)
     {
     }
 }
 
-class HeroW2 : PawnCard
+class Rogue : PawnCard
 {
-    public HeroW2() :
+    public Rogue() :
         base(PawnCard.COMBAT_TYPE_WARRIOR, 4, 75, 10, 75)
     {
     }
 }
 
-class HeroR1 : PawnCard
+class Hunter : PawnCard
 {
-    public HeroR1() :
+    public Hunter() :
         base(PawnCard.COMBAT_TYPE_RANGER, 3, 100, 6, 100)
     {
     }
 }
 
-class HeroR2 : PawnCard
+class Scout : PawnCard
 {
-    public HeroR2() :
+    public Scout() :
         base(PawnCard.COMBAT_TYPE_RANGER, 2, 125, 7, 100)
     {
     }
 }
 
-class HeroM1 : PawnCard
+class Necromancer : PawnCard
 {
-    public HeroM1() :
+    public Necromancer() :
         base(PawnCard.COMBAT_TYPE_WIZARD, 2, 125, 6, 125)
     {
     }
 }
 
-class HeroM2 : PawnCard
+class Mage : PawnCard
 {
-    public HeroM2() :
+    public Mage() :
         base(PawnCard.COMBAT_TYPE_WIZARD, 4, 75, 6, 125)
     {
     }
