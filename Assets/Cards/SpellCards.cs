@@ -1,8 +1,8 @@
 class Cripple : SpellCard
 {
-    public Cripple()
+    public Cripple(int amount)
     {
-        effects.Add(new SpeedEffect(-25));
+        effects.Add(new SpeedEffect(amount));
     }
 }
 
@@ -16,25 +16,25 @@ class WingsClipped : SpellCard
 
 class PlagueCarrier : SpellCard
 {
-    public PlagueCarrier()
+    public PlagueCarrier(int amount)
     {
-        effects.Add(new BurnEffect(1, 3));
+        effects.Add(new BurnEffect(amount, 3));
     }
 }
 
 class Feeble : SpellCard
 {
-    public Feeble()
+    public Feeble(int amount)
     {
-        effects.Add(new StrengthEffect(-25));
+        effects.Add(new StrengthEffect(amount));
     }
 }
 
 class Fragile : SpellCard
 {
-    public Fragile()
+    public Fragile(int amount)
     {
-        effects.Add(new HealthEffect(-99));
+        effects.Add(new HealthEffect(amount));
     }
 }
 
