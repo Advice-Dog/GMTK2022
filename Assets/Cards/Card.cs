@@ -5,8 +5,6 @@ using UnityEngine;
 public interface Card
 {
     int GetUniqueId();
-
-    string GetName();
 }
 
 /**
@@ -73,11 +71,6 @@ public class PawnCard : Card
         }
         return "";
     }
-
-    public string GetName()
-    {
-        return GetDescription();
-    }
 }
 
 public abstract class SpellCard : Card
@@ -132,10 +125,5 @@ public abstract class SpellCard : Card
         }
 
         return result;
-    }
-
-    public string GetName()
-    {
-        return this.GetType().Name;
     }
 }
