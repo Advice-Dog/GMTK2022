@@ -34,6 +34,8 @@ public class GameLoopManager : MonoBehaviour
 
     private static int GAME_STATE_PLAYS_SPELL = 1;
 
+    private static int GAME_STATE_BATTLE = 69;
+
     private static int GAME_STATE_SLIDING_OUT = 9;
 
     private static int GAME_STATE_ANIMATION = -665;
@@ -402,7 +404,7 @@ public class GameLoopManager : MonoBehaviour
 
         // todo: start the
         // todo: remove, just for testing, allow the user to end their turn on their own.
-        gameState = GameLoopManager.GAME_STATE_SLIDING_OUT;
+        gameState = GameLoopManager.GAME_STATE_BATTLE;
 
         SetSubtitles("And now... you fight.");
 
