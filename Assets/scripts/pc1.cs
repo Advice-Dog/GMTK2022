@@ -106,6 +106,7 @@ public class pc1 : MonoBehaviour
 
     void Update()
     {
+        healthBar.text = "Health: " + currentHealth;
         if (
             currentHealth <= 0 //if low health you die!
         )
@@ -179,11 +180,22 @@ public class pc1 : MonoBehaviour
         if (myTime <= fireDelta && myTime >= fireWait)
         {
             weaponParticle.SetActive(false);
+            Attack.volume = 0.6f;
+            Attack.pitch = Random.Range(0.6f, 0.7f);
         }
         else if (Input.GetKey("f") && myTime >= fireDelta)
         {
+            Attack.volume = Random.Range(0.5f, 0.6f);
+            Attack.pitch = Random.Range(0.8f, 0.9f);
+            Attack.Play();
             myTime = 0.0F;
             weaponParticle.SetActive(true);
+        }
+        else if (Input.GetKey("f"))
+        {
+            Attack.volume = Random.Range(0.5f, 0.6f);
+            Attack.pitch = Random.Range(0.05f, 0.06f);
+            Attack.Play();
         }
     }
 
@@ -208,7 +220,7 @@ public class pc1 : MonoBehaviour
     {
         if (other.gameObject.tag == "EnemyAttack" && myTimeDamage > damageDelta)
         {
-            currentHealth = currentHealth - 1;
+            currentHealth = currentHealth - other.GetComponent<DogControl>().attackDamage;
             Debug.Log("you were hit");
             myTimeDamage = 0.0F;
             healthBar.text = "Health: " + currentHealth;

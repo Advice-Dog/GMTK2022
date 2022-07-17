@@ -472,6 +472,7 @@ public class GameLoopManager : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
 
+        mainCameraObj.SetActive(false);
         //mainCamera.enabled = false;
         //audioListener.enabled = false;
         battleRoom.SetActive(true);
@@ -509,6 +510,7 @@ public class GameLoopManager : MonoBehaviour
             Quaternion.Euler(new Vector3(0, 0, 0)));
 
         obj.GetComponent<DogControl>().target = player.transform;
+        obj.GetComponent<DogControl>().player = player;
         obj.GetComponent<DogControl>().SetEnemyStats(activePawn);
     }
 
