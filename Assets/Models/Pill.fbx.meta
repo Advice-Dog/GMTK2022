@@ -3,9 +3,14 @@ guid: 341d5442aa910434cac4403b043501c4
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Beadboard
+    second: {fileID: 2100000, guid: a0cd5e4cb1701a74ca3a4e4b02f28158, type: 2}
   materials:
-    materialImportMode: 0
+    materialImportMode: 1
     materialName: 0
     materialSearch: 1
     materialLocation: 1
