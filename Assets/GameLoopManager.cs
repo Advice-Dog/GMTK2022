@@ -46,6 +46,8 @@ public class GameLoopManager : MonoBehaviour
 
     private static int GAME_STATE_WAITING = -666;
 
+    private static int ADVANCED_CARDS_ROOM = 5;
+
     private static float ROOM_SLIDE_SPEED = 3.0f;
 
     private int gameState = GAME_STATE_BLANK;
@@ -83,10 +85,19 @@ public class GameLoopManager : MonoBehaviour
 
     void DrawSpells()
     {
+        if (roomIndex == ADVANCED_CARDS_ROOM - 1)
+        {
+            deck.SetAdvancedDeck();
+            SetSubtitles("Why don't we make this more interesting.");
+        }
+        else
+        {
+            SetSubtitles("Now, pick your disease.");
+        }
+
         // let the user play their spells and end their turn
         deck.DrawSpells();
         SpawnHand();
-        SetSubtitles("Now, pick your disease.");
 
         // waiting for player's action
         gameState = GameLoopManager.GAME_STATE_WAITING;
@@ -332,8 +343,7 @@ public class GameLoopManager : MonoBehaviour
 
         obj.GetComponent<CardContainer>().SetCard(card);
 
-        // todo: should create based on the card
-        activePawn = new Pawn();
+        activePawn = new Pawn((PawnCard) card);
 
         SpawnSmokeBomb (position);
         SetSubtitles("The " + card.GetName() + "? What an interesting choice.");
@@ -426,6 +436,11 @@ public class GameLoopManager : MonoBehaviour
             SpawnArenaEnemy(i, enemyList[i]);
         }
 
+        player.GetComponent<pc1>().SetPlayerStats(activePawn);
+
+        // Handling Blind
+        UpdateArenaLights();
+
         SetSubtitles("And now... you fight.");
     }
 
@@ -446,6 +461,30 @@ public class GameLoopManager : MonoBehaviour
             Quaternion.Euler(new Vector3(0, 0, 0)));
 
         obj.GetComponent<DogControl>().target = player.transform;
+    }
+
+    void UpdateArenaLights()
+    {
+        GameObject[] lights = GameObject.FindGameObjectsWithTag("ArenaLight");
+        for (int i = 0; i < lights.Length; i++)
+        {
+            ParticleSystem system = lights[i].GetComponent<ParticleSystem>();
+            if (system != null)
+            {
+                if (activePawn.isBlind)
+                {
+                    system.Stop();
+                }
+                else
+                {
+                    system.Play();
+                }
+            }
+            else
+            {
+                lights[i].SetActive(!activePawn.isBlind);
+            }
+        }
     }
 
     void EndEncouter()

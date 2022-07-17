@@ -17,11 +17,11 @@ public class Deck : MonoBehaviour
 
     public Deck()
     {
-        SetDeck();
+        SetBaseDeck();
     }
 
     // Adding some default cards to the deck
-    void SetDeck()
+    void SetBaseDeck()
     {
         // Hero Cards
         heros.Add(new Tank());
@@ -31,13 +31,30 @@ public class Deck : MonoBehaviour
         heros.Add(new Necromancer());
         heros.Add(new Mage());
 
-        // Spell Cards
-        spells.Add(new Cripple());
+        // Easy Spell Cards
+        spells.Add(new Cripple(-25));
         spells.Add(new WingsClipped());
-        spells.Add(new Feeble());
-        spells.Add(new Fragile());
+
+        spells.Add(new Feeble(-10));
+        spells.Add(new Fragile(-5));
+        spells.Add(new PlagueCarrier(1));
+
+        // todo: remove
         spells.Add(new Blind());
-        spells.Add(new PlagueCarrier());
+    }
+
+    public void SetAdvancedDeck()
+    {
+        spells = new List<Card>();
+
+        // Hard Spell Cards
+        spells.Add(new Cripple(-50));
+        spells.Add(new WingsClipped());
+
+        spells.Add(new Feeble(-50));
+        spells.Add(new Fragile(-99));
+        spells.Add(new Blind());
+        spells.Add(new PlagueCarrier(2));
     }
 
     public void DrawPawns()

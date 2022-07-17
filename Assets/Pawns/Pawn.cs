@@ -7,16 +7,13 @@ public class Pawn
 {
     public int combatType;
 
-    // todo: get this value elsewhere
-    public int maxHealthPoints = 10;
+    public int maxHealthPoints;
 
-    public int currentHealthPoints = 10;
+    public int attackDamage;
 
-    public int damageAmount = 1;
+    public int attackSpeed;
 
-    public int attackSpeed = 100;
-
-    public int movementSpeed = 100;
+    public int movementSpeed;
 
     // todo: possibly use a list of effects instead.
     public bool isOnFire = false;
@@ -25,22 +22,24 @@ public class Pawn
 
     public bool isBlind = false;
 
-    public Pawn()
+    public Pawn(PawnCard card)
     {
+        this.maxHealthPoints = card.maxHealthPoints;
+        this.attackDamage = card.attackDamage;
+        this.attackSpeed = card.attackSpeed;
+        this.movementSpeed = card.movementSpeed;
     }
 
     public void ApplyEffect(Effect effect)
     {
         if (effect is StrengthEffect)
         {
-            damageAmount += ((StrengthEffect) effect).amount;
+            attackDamage += ((StrengthEffect) effect).amount;
         }
         else if (effect is HealthEffect)
         {
             maxHealthPoints += ((HealthEffect) effect).amount;
-            currentHealthPoints += ((HealthEffect) effect).amount;
             maxHealthPoints = Math.Max(1, maxHealthPoints);
-            currentHealthPoints = Math.Max(1, currentHealthPoints);
         }
         else if (effect is SpeedEffect)
         {
@@ -62,5 +61,17 @@ public class Pawn
         {
             isBlind = true;
         }
+    }
+
+    public override string ToString()
+    {
+        return "Pawn: hp: " +
+        maxHealthPoints +
+        ", attackDamage: " +
+        attackDamage +
+        ", attackSpeed: " +
+        attackSpeed +
+        ", movementSpeed: " +
+        movementSpeed;
     }
 }
