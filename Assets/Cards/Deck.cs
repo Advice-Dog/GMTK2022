@@ -5,101 +5,71 @@ using UnityEngine;
 
 public class Deck : MonoBehaviour
 {
-    public static int MAX_DRAW_COUNT = 5;
+    public static int MAX_PAWN_DRAW_COUNT = 2;
 
-    List<Card> cards = new List<Card>();
+    public static int MAX_SPELLS_DRAW_COUNT = 3;
 
-    List<Card> drawPile = new List<Card>();
+    List<Card> heros = new List<Card>();
+
+    List<Card> spells = new List<Card>();
 
     List<Card> hand = new List<Card>();
-
-    List<Card> discardPile = new List<Card>();
 
     public Deck()
     {
         SetDeck();
-        SetDrawPile();
     }
 
     // Adding some default cards to the deck
     void SetDeck()
     {
         // Hero Cards
-        for (int i = 0; i < 2; i++)
-        {
-            cards.Add(new HeroW1());
-            cards.Add(new HeroR1());
-            cards.Add(new HeroM1());
-            cards.Add(new HeroW2());
-            cards.Add(new HeroR2());
-            cards.Add(new HeroM2());
-        }
+        heros.Add(new HeroW1());
+        heros.Add(new HeroR1());
+        heros.Add(new HeroM1());
+        heros.Add(new HeroW2());
+        heros.Add(new HeroR2());
+        heros.Add(new HeroM2());
 
         // Spell Cards
-        for (int i = 0; i < 2; i++)
-        {
-            cards.Add(new Juice());
-            cards.Add(new GigaJuice());
-            cards.Add(new Beef());
-            cards.Add(new GigaBeef());
-            cards.Add(new Dejuice());
-            cards.Add(new GigaDejuice());
-            cards.Add(new Swiggy());
-            cards.Add(new Bazinga());
-            cards.Add(new Zoom());
-        }
-        cards.Add(new Kachow());
-        cards.Add(new Marcupial());
-        cards.Add(new BurnBabyBurn());
+        spells.Add(new Juice());
+        spells.Add(new GigaJuice());
+        spells.Add(new Beef());
+        spells.Add(new GigaBeef());
+        spells.Add(new Dejuice());
+        spells.Add(new GigaDejuice());
+        spells.Add(new Swiggy());
+        spells.Add(new Bazinga());
+        spells.Add(new Zoom());
+        spells.Add(new Kachow());
+        spells.Add(new Marcupial());
+        spells.Add(new BurnBabyBurn());
     }
 
-    public void SetHand()
+    public void DrawPawns()
     {
-        drawPile = drawPile.OrderBy(a => Random.value).ToList();
-        DrawCards();
-    }
-
-    void SetDrawPile()
-    {
-        // Copy the cards to the Draw pile
-        drawPile = new List<Card>(cards);
-    }
-
-    void DrawCards()
-    {
-        while (hand.Count < MAX_DRAW_COUNT)
+        hand.Clear();
+        heros = heros.OrderBy(a => Random.value).ToList();
+        for (int i = 0; i < MAX_PAWN_DRAW_COUNT; i++)
         {
-            DrawCard();
-        }
-
-        for (int i = 0; i < hand.Count; i++)
-        {
-            Debug.Log("Drawn Card: " + hand[i]);
+            hand.Add(heros[i]);
         }
     }
 
-    void DrawCard()
+    public void DrawSpells()
     {
-        if (drawPile.Count == 0)
+        hand.Clear();
+        spells = spells.OrderBy(a => Random.value).ToList();
+        for (int i = 0; i < MAX_SPELLS_DRAW_COUNT; i++)
         {
-            Debug.Log("Shuffling discard pile back into the draw pile.");
-
-            // shuffle the discard pile back into the draw pile
-            drawPile = discardPile.OrderBy(a => Random.value).ToList();
-            discardPile.Clear();
+            hand.Add(spells[i]);
         }
-
-        // Take the first card, remove it from the draw pile, and add it to the hand
-        Card card = drawPile[0];
-        drawPile = drawPile.GetRange(1, drawPile.Count - 1);
-        hand.Add (card);
     }
 
     public void RemoveCard(int index)
     {
         Card card = hand[index];
         hand.RemoveAt (index);
-        discardPile.Add (card);
     }
 
     public void RemoveCard(Card card)

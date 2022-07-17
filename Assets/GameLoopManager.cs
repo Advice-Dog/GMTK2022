@@ -12,6 +12,8 @@ public class GameLoopManager : MonoBehaviour
 
     public GameObject smokePrefab;
 
+    public TMPro.TextMeshProUGUI subtitles;
+
     private int roomIndex = 0;
 
     private static int MAX_ROOM_COUNT = 5;
@@ -24,9 +26,15 @@ public class GameLoopManager : MonoBehaviour
 
     private static int GAME_STATE_SPAWN_ENEMIES = -8;
 
-    private static int GAME_STATE_PLAYING = 0;
+    private static int GAME_STATE_SUMMON_PAWN = 0;
+
+    private static int GAME_STATE_PLAYS_SPELL = 1;
 
     private static int GAME_STATE_SLIDING_OUT = 9;
+
+    private static int GAME_STATE_ANIMATION = -665;
+
+    private static int GAME_STATE_WAITING = -666;
 
     private static float ROOM_SLIDE_SPEED = 3.0f;
 
@@ -42,15 +50,31 @@ public class GameLoopManager : MonoBehaviour
         GameObject obj = new GameObject("Deck");
         deck = obj.AddComponent<Deck>();
         Debug.Log("Created the players deck!");
+
+        SetSubtitles("Shall we play a game?");
     }
 
-    void Init()
+    void StartTurn()
     {
-        if (deck.IsHandEmpty())
-        {
-            activePawn = null;
-            SpawnHand();
-        }
+        Debug.Log(">>> Starting new turn <<<");
+        activePawn = null;
+        deck.DrawPawns();
+        SpawnHand();
+        SetSubtitles("Please, pick your Champion.");
+
+        // waiting for player's action
+        gameState = GameLoopManager.GAME_STATE_WAITING;
+    }
+
+    void DrawSpells()
+    {
+        // let the user play their spells and end their turn
+        deck.DrawSpells();
+        SpawnHand();
+        SetSubtitles("Now, pick your disease.");
+
+        // waiting for player's action
+        gameState = GameLoopManager.GAME_STATE_WAITING;
     }
 
     // Update is called once per frame
@@ -73,11 +97,19 @@ public class GameLoopManager : MonoBehaviour
             {
                 SpawnEnemyPawn (i);
             }
-            gameState = GAME_STATE_PLAYING;
+            gameState = GameLoopManager.GAME_STATE_WAITING;
+            SetSubtitles("Oh, the Dice has decided you shall fight " +
+            enemyCount.ToString() +
+            " enemies. Lucky you.");
+            Invoke("StartTurn", 2);
         }
-        else if (gameState == GameLoopManager.GAME_STATE_PLAYING)
+        else if (gameState == GameLoopManager.GAME_STATE_SUMMON_PAWN)
         {
-            Init();
+            StartTurn();
+        }
+        else if (gameState == GameLoopManager.GAME_STATE_PLAYS_SPELL)
+        {
+            DrawSpells();
         }
         else if (gameState == GameLoopManager.GAME_STATE_SLIDING_OUT)
         {
@@ -93,18 +125,26 @@ public class GameLoopManager : MonoBehaviour
 
     void SpawnHand()
     {
-        deck.SetHand();
-
         GameObject plane = GameObject.Find("Hand Plane");
         Vector3 position = plane.transform.position;
 
         float cardWidth = 0.12f;
         float cardSpacer = 0.02f;
 
-        position.x -= (cardWidth + cardSpacer) * 2f;
-
         List<Card> hand = deck.GetHand();
-        for (int i = 0; i < hand.Count; i++)
+
+        int cardCount = hand.Count;
+
+        // for centering the 2 cards
+        position.x -= (cardWidth + cardSpacer) * 0.5f;
+
+        // move cards, move it a little more to the left
+        if (cardCount == 3)
+        {
+            position.x -= (cardWidth + cardSpacer) * 0.5f;
+        }
+
+        for (int i = 0; i < cardCount; i++)
         {
             Card card = hand[i];
 
@@ -215,6 +255,12 @@ public class GameLoopManager : MonoBehaviour
 
     void OnMouseClick()
     {
+        if (gameState == GameLoopManager.GAME_STATE_ANIMATION)
+        {
+            Debug.Log("Cannot use any cards while the game is animating.");
+            return;
+        }
+
         RaycastHit raycastHit;
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         if (Physics.Raycast(ray, out raycastHit, 100f))
@@ -234,15 +280,11 @@ public class GameLoopManager : MonoBehaviour
                     {
                         SpawnPawn (card);
                     }
-                    deck.RemoveCard (card);
 
-                    Destroy (target);
+                    ClearHand (card);
 
-                    // todo: remove, just for testing, allow the user to end their turn on their own.
-                    if (deck.IsHandEmpty())
-                    {
-                        gameState = GameLoopManager.GAME_STATE_SLIDING_OUT;
-                    }
+                    // clears the full hand in 1 second
+                    Invoke("ClearHand", 1);
                 }
             }
         }
@@ -278,6 +320,8 @@ public class GameLoopManager : MonoBehaviour
         activePawn = new Pawn();
 
         SpawnSmokeBomb (position);
+        SetSubtitles("The " + card.GetName() + "? What an interesting choice.");
+        Invoke("DrawSpells", 3);
     }
 
     void SpawnEnemyPawn(int index)
@@ -322,5 +366,54 @@ public class GameLoopManager : MonoBehaviour
         }
 
         card.ApplyEffect (activePawn);
+
+        SetSubtitles("Ah, yes. " + card.GetName() + ", what a wonderful card.");
+        Invoke("StartEncounter", 3);
+    }
+
+    void ClearHand()
+    {
+        ClearHand(null);
+    }
+
+    void ClearHand(Card keepCard)
+    {
+        GameObject[] cards = GameObject.FindGameObjectsWithTag("Card");
+        foreach (GameObject card in cards)
+        {
+            if (
+                keepCard == null ||
+                card.GetComponent<CardContainer>().GetCard().GetUniqueId() !=
+                keepCard.GetUniqueId()
+            )
+            {
+                Destroy (card);
+            }
+        }
+    }
+
+    void StartEncounter()
+    {
+        Debug.Log(">>>>>>>>>>>>STARTING ENCOUNTER<<<<<<<<<<<<");
+
+        // todo: start the
+        // todo: remove, just for testing, allow the user to end their turn on their own.
+        gameState = GameLoopManager.GAME_STATE_SLIDING_OUT;
+
+        SetSubtitles("And now... you fight.");
+    }
+
+    void SetSubtitles(string message)
+    {
+        // prefix with name
+        message = "Death: " + message;
+        Debug.Log("Subtitles: " + message);
+        subtitles.text = message;
+        Invoke("ClearSubtitles", Math.Max(1, message.Length / 20));
+    }
+
+    void ClearSubtitles()
+    {
+        subtitles.text = "";
     }
 }
