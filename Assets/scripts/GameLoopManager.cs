@@ -92,7 +92,7 @@ public class GameLoopManager : MonoBehaviour
         AudioSource[] audioSources = GetComponents<AudioSource>();
         backgroundMusic = audioSources[0];
         rollSound = audioSources[1];
-        //deathVoice = audioSources[2];
+        deathVoice = audioSources[2];
 
         backgroundMusic.Play();
 
@@ -591,7 +591,6 @@ public class GameLoopManager : MonoBehaviour
 
         Music1.SetActive(true);
         Music2.SetActive(false);
-
 
         // unLock cursor
         Cursor.lockState = CursorLockMode.None;
