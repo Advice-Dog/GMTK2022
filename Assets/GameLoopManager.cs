@@ -30,6 +30,8 @@ public class GameLoopManager : MonoBehaviour
 
     private static int GAME_STATE_SLIDING_OUT = 9;
 
+    private static int GAME_STATE_ANIMATION = -665;
+
     private static int GAME_STATE_WAITING = -666;
 
     private static float ROOM_SLIDE_SPEED = 3.0f;
@@ -243,6 +245,12 @@ public class GameLoopManager : MonoBehaviour
 
     void OnMouseClick()
     {
+        if (gameState == GameLoopManager.GAME_STATE_ANIMATION)
+        {
+            Debug.Log("Cannot use any cards while the game is animating.");
+            return;
+        }
+
         RaycastHit raycastHit;
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         if (Physics.Raycast(ray, out raycastHit, 100f))
@@ -262,15 +270,11 @@ public class GameLoopManager : MonoBehaviour
                     {
                         SpawnPawn (card);
                     }
-                    deck.RemoveCard (card);
 
-                    Destroy (target);
+                    ClearHand (card);
 
-                    // todo: remove, just for testing, allow the user to end their turn on their own.
-                    if (deck.IsHandEmpty())
-                    {
-                        gameState = GameLoopManager.GAME_STATE_SLIDING_OUT;
-                    }
+                    // clears the full hand in 1 second
+                    Invoke("ClearHand", 1);
                 }
             }
         }
@@ -307,9 +311,7 @@ public class GameLoopManager : MonoBehaviour
 
         SpawnSmokeBomb (position);
 
-        ClearHand();
-
-        Invoke("DrawSpells", 1);
+        Invoke("DrawSpells", 3);
     }
 
     void SpawnEnemyPawn(int index)
@@ -354,14 +356,37 @@ public class GameLoopManager : MonoBehaviour
         }
 
         card.ApplyEffect (activePawn);
+
+        Invoke("StartEncounter", 3);
     }
 
     void ClearHand()
     {
+        ClearHand(null);
+    }
+
+    void ClearHand(Card keepCard)
+    {
         GameObject[] cards = GameObject.FindGameObjectsWithTag("Card");
         foreach (GameObject card in cards)
         {
-            Destroy (card);
+            if (
+                keepCard == null ||
+                card.GetComponent<CardContainer>().GetCard().GetUniqueId() !=
+                keepCard.GetUniqueId()
+            )
+            {
+                Destroy (card);
+            }
         }
+    }
+
+    void StartEncounter()
+    {
+        Debug.Log(">>>>>>>>>>>>STARTING ENCOUNTER<<<<<<<<<<<<");
+
+        // todo: start the
+        // todo: remove, just for testing, allow the user to end their turn on their own.
+        gameState = GameLoopManager.GAME_STATE_SLIDING_OUT;
     }
 }
