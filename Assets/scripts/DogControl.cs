@@ -90,6 +90,8 @@ public class DogControl : MonoBehaviour
         if (currentHealth <= 0)
         {
             enemy_Animator.SetBool("isDie", true);
+            agent.speed = 0;
+            agent.SetDestination(transform.position);
         }
         healthBar.text = currentHealth.ToString();
 
