@@ -406,7 +406,7 @@ public class GameLoopManager : MonoBehaviour
     void SetSubtitles(string message)
     {
         // prefix with name
-        message = "???: " + message;
+        message = "Death: " + message;
         Debug.Log("Subtitles: " + message);
         subtitles.text = message;
         Invoke("ClearSubtitles", 2);
