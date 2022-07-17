@@ -12,14 +12,20 @@ public class GameOverStoryController : MonoBehaviour
 
     Label label;
 
+    AudioSource deathVoice;
+
     // Start is called before the first frame update
     void Start()
     {
+        AudioSource[] audioSources = GetComponents<AudioSource>();
+        deathVoice = audioSources[0];
+
         var root = GetComponent<UIDocument>().rootVisualElement;
 
         label = root.Q<Label>("message-label");
 
         messages = new List<string>();
+        messages.Add("");
         messages.Add("Better luck next life. - Death");
 
         ShowNext();
@@ -36,8 +42,17 @@ public class GameOverStoryController : MonoBehaviour
 
         label.text = message;
 
+        if (message == "")
+        {
+            Invoke("ShowNext", 2);
+            return;
+        }
+
         int delay = Mathf.Max(3, message.Length / 10);
         Debug.Log("delay " + delay);
+
+        deathVoice.Play();
+        Invoke("StopVoice", delay - 1);
 
         if (index == messages.Count)
         {
@@ -46,6 +61,11 @@ public class GameOverStoryController : MonoBehaviour
         }
 
         Invoke("ShowNext", delay);
+    }
+
+    void StopVoice()
+    {
+        deathVoice.Stop();
     }
 
     void ReturnToMenu()

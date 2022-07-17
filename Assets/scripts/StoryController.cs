@@ -14,14 +14,20 @@ public class StoryController : MonoBehaviour
 
     int state = -1;
 
+    AudioSource deathVoice;
+
     // Start is called before the first frame update
     void Start()
     {
+        AudioSource[] audioSources = GetComponents<AudioSource>();
+        deathVoice = audioSources[0];
+
         var root = GetComponent<UIDocument>().rootVisualElement;
 
         label = root.Q<Label>("message-label");
 
         messages = new List<string>();
+        messages.Add("");
         messages
             .Add("It's with a heavy heart that I must inform you that you have died.");
         messages
@@ -60,8 +66,17 @@ public class StoryController : MonoBehaviour
 
         label.text = message;
 
+        if (message == "")
+        {
+            Invoke("ShowNext", 2);
+            return;
+        }
+
         int delay = Mathf.Max(3, message.Length / 10);
         Debug.Log("delay " + delay);
+
+        deathVoice.Play();
+        Invoke("StopVoice", delay - 1);
 
         if (index == messages.Count)
         {
@@ -70,6 +85,11 @@ public class StoryController : MonoBehaviour
         }
 
         Invoke("ShowNext", delay);
+    }
+
+    void StopVoice()
+    {
+        deathVoice.Stop();
     }
 
     void EnterWorld()
