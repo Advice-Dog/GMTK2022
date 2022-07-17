@@ -35,6 +35,10 @@ public class GameLoopManager : MonoBehaviour
 
     AudioSource rollSound;
 
+    public GameObject Music1;
+
+    public GameObject Music2;
+
     public TMPro.TextMeshProUGUI subtitles;
 
     private int roomIndex = 0;
@@ -473,6 +477,9 @@ public class GameLoopManager : MonoBehaviour
 
         Debug.Log("pawn: " + activePawn.ToString());
 
+        Music1.SetActive(false);
+        Music2.SetActive(true);
+
         // Lock cursor
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
@@ -565,6 +572,9 @@ public class GameLoopManager : MonoBehaviour
 
     public void EndEncouter(bool isAlive)
     {
+        Music1.SetActive(true);
+        Music2.SetActive(false);
+
         // clearing up any enemies
         GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
         for (int i = 0; i < enemies.Length; i++)
