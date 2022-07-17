@@ -12,6 +12,8 @@ public class GameLoopManager : MonoBehaviour
 
     public GameObject smokePrefab;
 
+    public TMPro.TextMeshProUGUI subtitles;
+
     private int roomIndex = 0;
 
     private static int MAX_ROOM_COUNT = 5;
@@ -48,6 +50,8 @@ public class GameLoopManager : MonoBehaviour
         GameObject obj = new GameObject("Deck");
         deck = obj.AddComponent<Deck>();
         Debug.Log("Created the players deck!");
+
+        SetSubtitles("Shall we play a game?");
     }
 
     void StartTurn()
@@ -56,6 +60,7 @@ public class GameLoopManager : MonoBehaviour
         activePawn = null;
         deck.DrawPawns();
         SpawnHand();
+        SetSubtitles("Please, pick your Champion.");
 
         // waiting for player's action
         gameState = GameLoopManager.GAME_STATE_WAITING;
@@ -66,6 +71,7 @@ public class GameLoopManager : MonoBehaviour
         // let the user play their spells and end their turn
         deck.DrawSpells();
         SpawnHand();
+        SetSubtitles("Now, pick your disease.");
 
         // waiting for player's action
         gameState = GameLoopManager.GAME_STATE_WAITING;
@@ -92,6 +98,9 @@ public class GameLoopManager : MonoBehaviour
                 SpawnEnemyPawn (i);
             }
             gameState = GameLoopManager.GAME_STATE_WAITING;
+            SetSubtitles("Oh, the Dice has decided you shall fight " +
+            enemyCount.ToString() +
+            " enemies. Lucky you.");
             Invoke("StartTurn", 1);
         }
         else if (gameState == GameLoopManager.GAME_STATE_SUMMON_PAWN)
@@ -311,7 +320,7 @@ public class GameLoopManager : MonoBehaviour
         activePawn = new Pawn();
 
         SpawnSmokeBomb (position);
-
+        SetSubtitles("The " + card.GetName() + "? What an interesting choice.");
         Invoke("DrawSpells", 3);
     }
 
@@ -358,6 +367,7 @@ public class GameLoopManager : MonoBehaviour
 
         card.ApplyEffect (activePawn);
 
+        SetSubtitles("Ah, yes. " + card.GetName() + ", what a wonderful card.");
         Invoke("StartEncounter", 3);
     }
 
@@ -389,5 +399,21 @@ public class GameLoopManager : MonoBehaviour
         // todo: start the
         // todo: remove, just for testing, allow the user to end their turn on their own.
         gameState = GameLoopManager.GAME_STATE_SLIDING_OUT;
+
+        SetSubtitles("And now... you fight.");
+    }
+
+    void SetSubtitles(string message)
+    {
+        // prefix with name
+        message = "???: " + message;
+        Debug.Log("Subtitles: " + message);
+        subtitles.text = message;
+        Invoke("ClearSubtitles", 2);
+    }
+
+    void ClearSubtitles()
+    {
+        subtitles.text = "";
     }
 }
