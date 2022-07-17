@@ -4910,7 +4910,7 @@ GameObject:
   - component: {fileID: 3843487980594331293}
   - component: {fileID: 3843487980594331292}
   m_Layer: 0
-  m_Name: light (1)
+  m_Name: EnemyAttackParticleFire
   m_TagString: EnemyAttack
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4923,14 +4923,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3843487980594331294}
-  m_LocalRotation: {x: -0.9999844, y: 5.9685584e-13, z: 2.131628e-13, w: 0.005583375}
+  m_LocalRotation: {x: 0.58678436, y: 0.09581552, z: -0.07833869, w: -0.800229}
   m_LocalPosition: {x: 0, y: 0.505, z: 0.11}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3843487979312596786}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 292.465, y: -39.934, z: 38.49}
 --- !u!198 &3843487980594331293
 ParticleSystem:
   m_ObjectHideFlags: 0
@@ -5014,7 +5014,7 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.81
+      scalar: 1.5
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -5560,7 +5560,7 @@ ParticleSystem:
     serializedVersion: 6
     enabled: 1
     type: 4
-    angle: 19.5
+    angle: 0.46
     length: 5
     boxThickness: {x: 0, y: 0, z: 0}
     radiusThickness: 1
@@ -5646,7 +5646,7 @@ ParticleSystem:
     sphericalDirectionAmount: 0
     randomPositionAmount: 0
     radius:
-      value: 0.0001
+      value: 0.05
       mode: 0
       spread: 0
       speed:
@@ -5890,8 +5890,8 @@ ParticleSystem:
           inWeight: 0.33333334
           outWeight: 0.33333334
         - serializedVersion: 3
-          time: 0.99615383
-          value: 0.5384623
+          time: 0.9685354
+          value: 0.26819098
           inSlope: -0.85712594
           outSlope: -0.85712594
           tangentMode: 0
@@ -9786,12 +9786,16 @@ MonoBehaviour:
   jumpRadius: 2
   target: {fileID: 0}
   castLocation: {fileID: 3843487980750676027}
-  currentHealth: 19
-  fireDelta: 0.53
-  damageDelta: 0.67
+  currentHealth: 4
+  weaponParticle: {fileID: 3843487980594331294}
+  fireDelta: 5.02
+  fireWait: 2
+  damageDelta: 1
   enemy_Animator: {fileID: 7222747261429868049}
   Attack: {fileID: 3843487980750676025}
   Walk: {fileID: 6464855027514443228}
+  healthBar: {fileID: 0}
+  m_someOtherScriptOnAnotherGameObject: {fileID: 0}
 --- !u!82 &3843487980750676025
 AudioSource:
   m_ObjectHideFlags: 0

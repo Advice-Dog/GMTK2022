@@ -738,6 +738,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ea240e63833f881438d455c39ec123d4, type: 3}
+--- !u!1 &406579333 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1286649108497707558, guid: 6ca7ce04097b3b2449c3cddc2c104b46, type: 3}
+  m_PrefabInstance: {fileID: 572621274}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &430216479 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6894912067911185779, guid: a043c07b1408f0d4195831a0ade130cf, type: 3}
@@ -1173,6 +1178,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1965257165}
     m_Modifications:
+    - target: {fileID: 220859539357082066, guid: 6ca7ce04097b3b2449c3cddc2c104b46, type: 3}
+      propertyPath: ShapeModule.angle
+      value: 5.52
+      objectReference: {fileID: 0}
+    - target: {fileID: 220859539357082066, guid: 6ca7ce04097b3b2449c3cddc2c104b46, type: 3}
+      propertyPath: InitialModule.startLifetime.scalar
+      value: 2.39
+      objectReference: {fileID: 0}
+    - target: {fileID: 220859539357082066, guid: 6ca7ce04097b3b2449c3cddc2c104b46, type: 3}
+      propertyPath: SizeModule.curve.maxCurve.m_Curve.Array.data[1].time
+      value: 0.97775173
+      objectReference: {fileID: 0}
+    - target: {fileID: 220859539357082066, guid: 6ca7ce04097b3b2449c3cddc2c104b46, type: 3}
+      propertyPath: SizeModule.curve.maxCurve.m_Curve.Array.data[1].value
+      value: 0.16008246
+      objectReference: {fileID: 0}
     - target: {fileID: 1286649108497707558, guid: 6ca7ce04097b3b2449c3cddc2c104b46, type: 3}
       propertyPath: m_TagString
       value: PlayerAttack
@@ -1240,6 +1261,26 @@ PrefabInstance:
     - target: {fileID: 7254330263052897647, guid: 6ca7ce04097b3b2449c3cddc2c104b46, type: 3}
       propertyPath: m_Name
       value: wand
+      objectReference: {fileID: 0}
+    - target: {fileID: 7801284827835455544, guid: 6ca7ce04097b3b2449c3cddc2c104b46, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.917426
+      objectReference: {fileID: 0}
+    - target: {fileID: 7801284827835455544, guid: 6ca7ce04097b3b2449c3cddc2c104b46, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.39790642
+      objectReference: {fileID: 0}
+    - target: {fileID: 7801284827835455544, guid: 6ca7ce04097b3b2449c3cddc2c104b46, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 4.5461983e-14
+      objectReference: {fileID: 0}
+    - target: {fileID: 7801284827835455544, guid: 6ca7ce04097b3b2449c3cddc2c104b46, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 6.3214765e-13
+      objectReference: {fileID: 0}
+    - target: {fileID: 7801284827835455544, guid: 6ca7ce04097b3b2449c3cddc2c104b46, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -46.895
       objectReference: {fileID: 0}
     - target: {fileID: 7814796465473380348, guid: 6ca7ce04097b3b2449c3cddc2c104b46, type: 3}
       propertyPath: m_TagString
@@ -2799,12 +2840,20 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 620274228}
     - target: {fileID: 5108414517332481678, guid: 2733a796d7d4d67419b947336686e897, type: 3}
+      propertyPath: fireWait
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5108414517332481678, guid: 2733a796d7d4d67419b947336686e897, type: 3}
       propertyPath: wepRot.x
       value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 5108414517332481678, guid: 2733a796d7d4d67419b947336686e897, type: 3}
       propertyPath: wepRot.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5108414517332481678, guid: 2733a796d7d4d67419b947336686e897, type: 3}
+      propertyPath: fireDelta
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5108414517332481678, guid: 2733a796d7d4d67419b947336686e897, type: 3}
       propertyPath: healthBar
@@ -2822,6 +2871,10 @@ PrefabInstance:
       propertyPath: deathAnimator
       value: 
       objectReference: {fileID: 910241891}
+    - target: {fileID: 5108414517332481678, guid: 2733a796d7d4d67419b947336686e897, type: 3}
+      propertyPath: weaponParticle
+      value: 
+      objectReference: {fileID: 406579333}
     - target: {fileID: 5108414517332481678, guid: 2733a796d7d4d67419b947336686e897, type: 3}
       propertyPath: m_someOtherScriptOnAnotherGameObject
       value: 
