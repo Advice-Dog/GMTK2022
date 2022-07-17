@@ -11,6 +11,8 @@ public class GameLoopManager : MonoBehaviour
 
     public GameObject pawnPrefab;
 
+    public GameObject enemyPrefab;
+
     public GameObject smokePrefab;
 
     public GameObject arenaEnemyPrefab;
@@ -21,7 +23,7 @@ public class GameLoopManager : MonoBehaviour
 
     public GameObject mainCameraObj;
 
-    public AudioListener audioListener; 
+    public AudioListener audioListener;
 
     public GameObject battleRoom;
 
@@ -385,7 +387,7 @@ public class GameLoopManager : MonoBehaviour
         position.y += 0.1f;
 
         GameObject obj =
-            Instantiate(pawnPrefab,
+            Instantiate(enemyPrefab,
             position,
             Quaternion.Euler(new Vector3(0, 0, 0)));
 
@@ -453,6 +455,7 @@ public class GameLoopManager : MonoBehaviour
         Debug.Log("pawn: " + activePawn.ToString());
 
         mainCameraObj.SetActive(false);
+
         //mainCamera.enabled = false;
         //audioListener.enabled = false;
         battleRoom.SetActive(true);
@@ -518,9 +521,9 @@ public class GameLoopManager : MonoBehaviour
         if (isAlive)
         {
             //mainCamera.enabled = true;
-        mainCameraObj.SetActive(true);
-        battleRoom.SetActive(false);
-        deathAnimator.SetBool("isTilt", true);
+            mainCameraObj.SetActive(true);
+            battleRoom.SetActive(false);
+            deathAnimator.SetBool("isTilt", true);
         }
         else
         {
